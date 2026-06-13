@@ -87,63 +87,162 @@ function Nav() {
 function Hero() {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
-  const y = useTransform(scrollYProgress, [0, 1], [0, -100]);
+  const yBg = useTransform(scrollYProgress, [0, 1], [0, -120]);
+  const yMid = useTransform(scrollYProgress, [0, 1], [0, -60]);
+  const rotateScroll = useTransform(scrollYProgress, [0, 1], [0, 90]);
+
+  const word = "EVERYTHING".split("");
+  const wordColors = ["pop-red","pop-blue","pop-orange","pop-green","pop-pink","pop-purple","pop-red","pop-blue","pop-orange","pop-mint"];
+
   return (
     <section id="top" ref={ref} className="paper-bg relative overflow-hidden">
-      {/* floating doodles */}
-      <motion.div style={{ y }} className="pointer-events-none absolute inset-0">
+      {/* ===== Background layer: giant CMYK ink blobs ===== */}
+      <motion.div style={{ y: yBg }} aria-hidden className="pointer-events-none absolute inset-0">
+        <motion.div
+          className="absolute -left-32 -top-24 h-[34rem] w-[34rem] rounded-full opacity-70 blur-2xl"
+          style={{ background: "radial-gradient(circle at 30% 30%, var(--pop-pink), transparent 60%)" }}
+          animate={{ scale: [1, 1.1, 1], x: [0, 20, 0] }}
+          transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <motion.div
+          className="absolute -right-40 top-20 h-[36rem] w-[36rem] rounded-full opacity-70 blur-2xl"
+          style={{ background: "radial-gradient(circle at 70% 30%, var(--pop-yellow), transparent 60%)" }}
+          animate={{ scale: [1.05, 0.95, 1.05], x: [0, -20, 0] }}
+          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <motion.div
+          className="absolute bottom-0 left-1/3 h-[30rem] w-[30rem] rounded-full opacity-60 blur-2xl"
+          style={{ background: "radial-gradient(circle at 50% 50%, var(--pop-mint), transparent 60%)" }}
+          animate={{ scale: [1, 1.15, 1] }}
+          transition={{ duration: 11, repeat: Infinity, ease: "easeInOut" }}
+        />
+      </motion.div>
+
+      {/* ===== Mid layer: grid of dots + floating paper sheets ===== */}
+      <motion.div style={{ y: yMid }} aria-hidden className="pointer-events-none absolute inset-0">
+        {/* big spinning CMYK badge top-right */}
+        <motion.div
+          style={{ rotate: rotateScroll }}
+          className="absolute right-6 top-24 hidden h-40 w-40 md:block"
+        >
+          <svg viewBox="0 0 200 200" className="h-full w-full animate-spin-slow">
+            <defs>
+              <path id="circ" d="M 100,100 m -78,0 a 78,78 0 1,1 156,0 a 78,78 0 1,1 -156,0" />
+            </defs>
+            <circle cx="100" cy="100" r="92" fill="var(--ink)" />
+            <circle cx="100" cy="100" r="60" fill="var(--pop-yellow)" stroke="var(--ink)" strokeWidth="4" />
+            <text fill="var(--cream)" fontSize="16" fontWeight="900" letterSpacing="4">
+              <textPath href="#circ">★ PRINT ANYTHING ★ ANY SIZE ★ ANY SURFACE </textPath>
+            </text>
+            <text x="100" y="95" textAnchor="middle" fontFamily="Fredoka" fontWeight="900" fontSize="22" fill="var(--ink)">SINCE</text>
+            <text x="100" y="118" textAnchor="middle" fontFamily="Fredoka" fontWeight="900" fontSize="22" fill="var(--pop-red)">FOREVER</text>
+          </svg>
+        </motion.div>
+
+        {/* floating paper sheets */}
         {[
-          { t: "📄", x: "8%", y: "20%", d: 0 },
-          { t: "🖨️", x: "85%", y: "15%", d: 0.4 },
-          { t: "✏️", x: "12%", y: "75%", d: 0.8 },
-          { t: "🎨", x: "88%", y: "70%", d: 0.2 },
-          { t: "📐", x: "50%", y: "85%", d: 0.6 },
-          { t: "✨", x: "75%", y: "40%", d: 1 },
+          { x: "6%", y: "30%", r: -14, c: "white", w: 90, h: 120, d: 0 },
+          { x: "88%", y: "55%", r: 12, c: "var(--pop-pink)", w: 80, h: 110, d: 0.6 },
+          { x: "14%", y: "70%", r: 8, c: "var(--pop-blue)", w: 70, h: 96, d: 1.2 },
+          { x: "82%", y: "18%", r: -10, c: "var(--pop-green)", w: 64, h: 88, d: 0.3 },
         ].map((s, i) => (
-          <motion.span
+          <motion.div
             key={i}
-            className="absolute text-4xl sm:text-5xl"
-            style={{ left: s.x, top: s.y }}
-            animate={{ y: [0, -18, 0], rotate: [0, 8, -8, 0] }}
-            transition={{ duration: 5, repeat: Infinity, delay: s.d, ease: "easeInOut" }}
+            className="absolute border-ink shadow-cartoon rounded-md hidden sm:block"
+            style={{ left: s.x, top: s.y, width: s.w, height: s.h, background: s.c, rotate: s.r }}
+            animate={{ y: [0, -16, 0], rotate: [s.r, s.r + 6, s.r] }}
+            transition={{ duration: 6, repeat: Infinity, delay: s.d, ease: "easeInOut" }}
           >
-            {s.t}
-          </motion.span>
+            <div className="m-2 space-y-1">
+              <div className="h-1.5 w-3/4 rounded-full bg-ink/70" />
+              <div className="h-1.5 w-1/2 rounded-full bg-ink/40" />
+              <div className="h-1.5 w-2/3 rounded-full bg-ink/40" />
+            </div>
+          </motion.div>
+        ))}
+
+        {/* doodle emojis */}
+        {[
+          { t: "✏️", x: "4%", y: "12%", d: 0 },
+          { t: "🎨", x: "92%", y: "78%", d: 0.4 },
+          { t: "✨", x: "48%", y: "8%", d: 0.8 },
+          { t: "📐", x: "50%", y: "92%", d: 1 },
+        ].map((s, i) => (
+          <motion.span key={i} className="absolute text-3xl sm:text-4xl"
+            style={{ left: s.x, top: s.y }}
+            animate={{ y: [0, -14, 0], rotate: [0, 12, -12, 0] }}
+            transition={{ duration: 5, repeat: Infinity, delay: s.d, ease: "easeInOut" }}
+          >{s.t}</motion.span>
         ))}
       </motion.div>
 
-      <div className="relative mx-auto max-w-7xl px-4 pt-16 pb-24 sm:px-6 sm:pt-24 sm:pb-32">
+      <div className="relative mx-auto max-w-7xl px-4 pt-14 pb-28 sm:px-6 sm:pt-20 sm:pb-36">
+        {/* washi tape strips */}
+        <div className="pointer-events-none absolute left-1/2 top-6 -translate-x-1/2 rotate-[-4deg] hidden sm:block">
+          <div className="border-ink h-6 w-44 rounded-sm opacity-90"
+            style={{ background: "repeating-linear-gradient(45deg, var(--pop-yellow) 0 10px, var(--ink) 10px 12px)" }} />
+        </div>
+
         <motion.div initial="hidden" animate="show" className="text-center">
+          {/* badge */}
           <motion.div variants={popIn} className="mx-auto mb-6 inline-flex items-center gap-2 rounded-full border-ink shadow-cartoon-sm bg-white px-4 py-2 text-sm font-black">
-            <span className="inline-block h-2 w-2 animate-pulse rounded-full" style={{ background: "var(--pop-green)" }} />
+            <span className="relative inline-flex h-2.5 w-2.5">
+              <span className="absolute inset-0 animate-ping rounded-full opacity-75" style={{ background: "var(--pop-green)" }} />
+              <span className="relative inline-block h-2.5 w-2.5 rounded-full" style={{ background: "var(--pop-green)" }} />
+            </span>
             OPEN NOW · YESHWANT STADIUM, NAGPUR
           </motion.div>
 
-          <motion.h1
-            variants={popIn}
-            custom={1}
-            className="font-display text-[12vw] font-bold leading-[0.9] sm:text-8xl md:text-9xl"
-          >
-            <span className="block">we print</span>
-            <span className="relative inline-block">
-              <span className="relative z-10" style={{ color: "var(--pop-red)" }}>EVERYTHING</span>
-              <motion.svg
-                viewBox="0 0 300 30" className="absolute -bottom-2 left-0 w-full" aria-hidden
-                initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 1.2, delay: 0.6 }}
-              >
-                <motion.path d="M5 20 Q 150 -5 295 20" fill="none" stroke="var(--pop-yellow)" strokeWidth="10" strokeLinecap="round"
-                  initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 1.2, delay: 0.6 }} />
-              </motion.svg>
+          {/* HUGE headline */}
+          <motion.h1 variants={popIn} custom={1} className="font-display font-bold leading-[0.85]">
+            <span className="block text-[14vw] sm:text-7xl md:text-8xl">
+              <span className="inline-block -rotate-2">we</span>{" "}
+              <span className="relative inline-block rotate-1">
+                <span className="relative z-10">print</span>
+                <motion.span
+                  aria-hidden
+                  className="absolute inset-x-0 bottom-1 -z-0 h-4 sm:h-6 rounded-full"
+                  style={{ background: "var(--pop-pink)" }}
+                  initial={{ scaleX: 0, originX: 0 }}
+                  animate={{ scaleX: 1 }}
+                  transition={{ duration: 0.7, delay: 0.3 }}
+                />
+              </span>
             </span>
-            <span className="block font-marker text-5xl font-bold sm:text-7xl" style={{ color: "var(--pop-blue)" }}>
-              ...yes, even that thing.
+
+            {/* EVERYTHING — letter by letter, multicolor, jiggling */}
+            <span className="relative mt-2 block text-[18vw] sm:text-[10rem] md:text-[12rem] leading-none tracking-tight">
+              {word.map((ch, i) => (
+                <motion.span
+                  key={i}
+                  className="inline-block"
+                  style={{ color: `var(--color-${wordColors[i]})`, WebkitTextStroke: "3px var(--ink)" }}
+                  initial={{ y: 80, opacity: 0, rotate: -15 }}
+                  animate={{ y: 0, opacity: 1, rotate: i % 2 === 0 ? -4 : 4 }}
+                  transition={{ delay: 0.5 + i * 0.05, type: "spring", stiffness: 220, damping: 12 }}
+                  whileHover={{ y: -10, rotate: 0, scale: 1.1 }}
+                >
+                  {ch}
+                </motion.span>
+              ))}
+              {/* sparkle */}
+              <motion.span
+                className="absolute -right-2 -top-4 text-4xl sm:text-6xl"
+                animate={{ rotate: [0, 25, -25, 0], scale: [1, 1.2, 1] }}
+                transition={{ duration: 2.5, repeat: Infinity }}
+              >✨</motion.span>
+            </span>
+
+            <span className="mt-4 block font-marker text-5xl font-bold sm:text-7xl" style={{ color: "var(--pop-blue)" }}>
+              ...yes, even <span className="underline decoration-wavy decoration-[var(--pop-red)]">that</span> thing.
             </span>
           </motion.h1>
 
           <motion.p variants={popIn} custom={2} className="mx-auto mt-8 max-w-2xl text-lg font-bold text-muted-foreground sm:text-xl">
-            Xerox, banners, stickers, signage, wallpapers, canvas, foiling, blueprints — if you can imagine it on a surface, we can put it there. Big or small, one piece or one thousand.
+            Xerox, banners, stickers, signage, wallpapers, canvas, foiling, blueprints — if you can imagine it on a surface, we can put it there.
           </motion.p>
 
+          {/* CTAs */}
           <motion.div variants={popIn} custom={3} className="mt-10 flex flex-wrap items-center justify-center gap-4">
             <motion.a whileHover={{ scale: 1.05, rotate: -1 }} whileTap={{ scale: 0.96 }}
               href="https://wa.me/917276141392" target="_blank" rel="noreferrer"
@@ -158,26 +257,61 @@ function Hero() {
             </motion.a>
           </motion.div>
 
-          {/* big bouncing printer scene */}
-          <motion.div variants={popIn} custom={4} className="relative mx-auto mt-16 max-w-3xl">
-            <motion.div animate={{ y: [0, -10, 0] }} transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}>
+          {/* hero stage: printer + spitting prints */}
+          <motion.div variants={popIn} custom={4} className="relative mx-auto mt-20 max-w-4xl">
+            {/* CMYK ink dots floating around */}
+            {[
+              { c: "var(--pop-pink)", x: "5%", y: "10%", s: 22 },
+              { c: "var(--pop-yellow)", x: "92%", y: "20%", s: 28 },
+              { c: "var(--pop-blue)", x: "0%", y: "75%", s: 18 },
+              { c: "var(--ink)", x: "96%", y: "78%", s: 16 },
+            ].map((d, i) => (
+              <motion.span key={i} className="absolute rounded-full border-ink" style={{ left: d.x, top: d.y, width: d.s, height: d.s, background: d.c }}
+                animate={{ y: [0, -14, 0] }} transition={{ duration: 3 + i, repeat: Infinity, ease: "easeInOut" }} />
+            ))}
+
+            {/* spitting prints animation */}
+            <div className="pointer-events-none absolute inset-x-0 -top-10 flex justify-center gap-3">
+              {["pop-red","pop-yellow","pop-blue","pop-green","pop-pink"].map((c, i) => (
+                <motion.div key={c}
+                  className="border-ink shadow-cartoon-sm h-14 w-10 rounded-sm"
+                  style={{ background: `var(--color-${c})` }}
+                  animate={{ y: [0, -30, 0], rotate: [0, (i - 2) * 8, 0] }}
+                  transition={{ duration: 2.4, repeat: Infinity, delay: i * 0.15, ease: "easeInOut" }}
+                />
+              ))}
+            </div>
+
+            <motion.div animate={{ y: [0, -10, 0], rotate: [-1, 1, -1] }} transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}>
               <PrinterDoodle />
             </motion.div>
+
+            {/* arrow + handwritten note */}
+            <div className="absolute -right-4 top-1/2 hidden -translate-y-1/2 rotate-6 md:block">
+              <div className="font-marker text-2xl" style={{ color: "var(--pop-red)" }}>
+                meet Xerox-bhau →
+              </div>
+            </div>
           </motion.div>
         </motion.div>
       </div>
+
+      {/* bottom scallop divider */}
+      <svg className="block w-full" viewBox="0 0 1200 40" preserveAspectRatio="none" aria-hidden>
+        <path d="M0,40 Q30,0 60,40 T120,40 T180,40 T240,40 T300,40 T360,40 T420,40 T480,40 T540,40 T600,40 T660,40 T720,40 T780,40 T840,40 T900,40 T960,40 T1020,40 T1080,40 T1140,40 T1200,40 V40 H0 Z" fill="var(--ink)" />
+      </svg>
     </section>
   );
 }
 
 function PrinterDoodle() {
   return (
-    <svg viewBox="0 0 600 360" className="mx-auto w-full max-w-2xl drop-shadow-[8px_8px_0_var(--ink)]">
+    <svg viewBox="0 0 600 360" className="mx-auto w-full max-w-2xl drop-shadow-[10px_10px_0_var(--ink)]">
       {/* paper tray flying sheets */}
       {[0, 1, 2].map((i) => (
         <motion.rect key={i} x={220 + i * 12} y={20 + i * 8} width="160" height="90" rx="6"
           fill="white" stroke="var(--ink)" strokeWidth="4"
-          animate={{ y: [20 + i * 8, 10 + i * 8, 20 + i * 8], rotate: [i * -2, i * 2, i * -2] }}
+          animate={{ y: [20 + i * 8, 6 + i * 8, 20 + i * 8], rotate: [i * -2, i * 2, i * -2] }}
           transition={{ duration: 3, repeat: Infinity, delay: i * 0.2 }}
         />
       ))}
@@ -193,6 +327,9 @@ function PrinterDoodle() {
         animate={{ cx: [368, 374, 368], cy: [212, 208, 212] }} transition={{ duration: 4, repeat: Infinity }} />
       {/* smile */}
       <path d="M 270 250 Q 300 270 330 250" stroke="var(--ink)" strokeWidth="5" fill="none" strokeLinecap="round" />
+      {/* cheeks */}
+      <circle cx="210" cy="240" r="8" fill="var(--pop-pink)" opacity="0.7" />
+      <circle cx="390" cy="240" r="8" fill="var(--pop-pink)" opacity="0.7" />
       {/* legs */}
       <rect x="160" y="300" width="20" height="40" fill="var(--ink)" />
       <rect x="420" y="300" width="20" height="40" fill="var(--ink)" />
