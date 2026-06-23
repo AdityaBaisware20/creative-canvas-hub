@@ -469,7 +469,7 @@ function BigStuff() {
   );
 }
 
-function Chip({ icon: Icon, title, i, variant }: { icon: typeof Shield; title: string; i: number; variant: "ink" | "paper" }) {
+function Chip({ icon: Icon, title, i, variant }: { icon: React.ComponentType<{ className?: string }>; title: string; i: number; variant: "ink" | "paper" }) {
   const dark = variant === "ink";
   return (
     <motion.div
