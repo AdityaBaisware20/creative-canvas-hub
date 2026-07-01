@@ -2,11 +2,22 @@ import { createFileRoute } from "@tanstack/react-router";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import {
-  Printer, Scan, BookOpen, Layers, Maximize2, Stamp,
-  Image as ImageIcon, Frame, Wallpaper, MonitorSmartphone,
-  Flag, Lightbulb, Shield, Megaphone, Palette, MapPin, Phone, MessageCircle, Mail as MailIcon,
-  ArrowUpRight, ArrowRight, CheckCircle2, Factory, Building2, Hospital, GraduationCap, ShoppingBag, Hammer, Zap, Clock, Award,
+  Printer, Scan, BookOpen, Layers, Maximize2,
+  MapPin, Phone, MessageCircle, Mail as MailIcon,
+  ArrowUpRight, ArrowRight, CheckCircle2, Factory, Building2, Hospital, GraduationCap, ShoppingBag, Hammer, Zap, Clock, Award, Palette,
 } from "lucide-react";
+import { Nav, UtilityBar } from "@/components/site-nav";
+
+import svcWide from "@/assets/svc-wideformat.jpg";
+import svcColor from "@/assets/svc-color.jpg";
+import svcBinding from "@/assets/svc-binding.jpg";
+import svcScan from "@/assets/svc-scan.jpg";
+import svcLam from "@/assets/svc-lamination.jpg";
+import svcScaling from "@/assets/svc-scaling.jpg";
+import indProc from "@/assets/ind-procurement.jpg";
+import bigHoard from "@/assets/big-hoarding.jpg";
+import bigWall from "@/assets/big-wallpaper.jpg";
+import aboutCraft from "@/assets/about-craft.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -21,72 +32,7 @@ export const Route = createFileRoute("/")({
 });
 
 /* ============================================================
-   TOP UTILITY BAR
-   ============================================================ */
-function UtilityBar() {
-  return (
-    <div className="hairline-strong border-x-0 border-t-0 bg-ink text-ivory">
-      <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-2 text-xs sm:px-6">
-        <div className="flex items-center gap-4">
-          <span className="hidden items-center gap-1.5 sm:inline-flex">
-            <span className="relative inline-flex h-1.5 w-1.5">
-              <span className="absolute inset-0 animate-ping rounded-full bg-[var(--sage)] opacity-75" />
-              <span className="relative inline-block h-1.5 w-1.5 rounded-full bg-[var(--sage)]" />
-            </span>
-            <span className="font-medium tracking-wide opacity-80">Production line live · UPS-backed</span>
-          </span>
-          <span className="font-mono opacity-60">Est. since you needed prints · Nagpur</span>
-        </div>
-        <div className="flex items-center gap-4">
-          <a href="tel:+919822224644" className="hidden font-mono opacity-80 hover:opacity-100 sm:inline">+91 98222 24644</a>
-          <a href="mailto:truecopycentre@gmail.com" className="font-mono opacity-80 hover:opacity-100">B2B enquiries →</a>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-/* ============================================================
-   NAV
-   ============================================================ */
-function Nav() {
-  const links = [
-    ["Capabilities", "#capabilities"],
-    ["Industries", "#industries"],
-    ["Process", "#process"],
-    ["Specs", "#specs"],
-    ["Contact", "#contact"],
-  ];
-  return (
-    <nav className="sticky top-0 z-50 border-b bg-[color-mix(in_oklab,var(--ivory)_88%,transparent)] backdrop-blur-md">
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6">
-        <a href="#top" className="flex items-center gap-3">
-          <div className="hairline-strong grid h-10 w-10 place-items-center rounded-md bg-ink">
-            <span className="font-display text-lg font-semibold text-ivory">T</span>
-          </div>
-          <div className="leading-tight">
-            <div className="font-display text-base font-semibold">True Copy Centre</div>
-            <div className="font-mono text-[10px] uppercase tracking-[0.15em] text-muted-foreground">Print production · est. Nagpur</div>
-          </div>
-        </a>
-        <div className="hidden items-center gap-8 md:flex">
-          {links.map(([n, h]) => (
-            <a key={n} href={h} className="group relative text-sm font-medium text-foreground/80 transition hover:text-foreground">
-              {n}
-              <span className="absolute -bottom-1 left-0 h-px w-0 bg-brick transition-all group-hover:w-full" style={{ background: "var(--brick)" }} />
-            </a>
-          ))}
-        </div>
-        <a href="#contact" className="inline-flex items-center gap-1.5 rounded-full bg-ink px-4 py-2 text-xs font-medium text-ivory transition hover:bg-ink/90">
-          Request a quote <ArrowUpRight className="h-3.5 w-3.5" />
-        </a>
-      </div>
-    </nav>
-  );
-}
-
-/* ============================================================
-   HERO — editorial split, mascot tucked in corner
+   HERO
    ============================================================ */
 function Hero() {
   const ref = useRef<HTMLDivElement>(null);
@@ -95,13 +41,10 @@ function Hero() {
 
   return (
     <section id="top" ref={ref} className="relative overflow-hidden">
-      {/* faint grid */}
       <div aria-hidden className="pointer-events-none absolute inset-0 grid-bg opacity-60" />
-      {/* soft warm glow */}
       <div aria-hidden className="pointer-events-none absolute -right-40 -top-40 h-[40rem] w-[40rem] rounded-full opacity-30 blur-3xl" style={{ background: "radial-gradient(circle, var(--ochre), transparent 60%)" }} />
 
       <div className="relative mx-auto grid max-w-7xl gap-12 px-4 pt-16 pb-24 sm:px-6 sm:pt-24 sm:pb-32 lg:grid-cols-12">
-        {/* LEFT: editorial copy */}
         <div className="lg:col-span-7">
           <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}
             className="hairline inline-flex items-center gap-2 rounded-full bg-paper px-3 py-1.5 text-xs font-medium">
@@ -131,7 +74,7 @@ function Hero() {
           >
             <a href="#contact" className="group inline-flex items-center gap-2 rounded-full px-6 py-3.5 text-sm font-medium text-ivory transition hover:translate-y-[-2px]"
               style={{ background: "var(--brick)", boxShadow: "0 12px 28px -10px color-mix(in oklab, var(--brick) 60%, transparent)" }}>
-              Request a quote
+              Contact us
               <ArrowRight className="h-4 w-4 transition group-hover:translate-x-0.5" />
             </a>
             <a href="https://wa.me/917276141392" target="_blank" rel="noreferrer"
@@ -141,7 +84,6 @@ function Hero() {
             </a>
           </motion.div>
 
-          {/* trust numbers */}
           <div className="mt-14 grid grid-cols-3 gap-6 border-t pt-8">
             {[
               { k: "44″", v: "Max plot width" },
@@ -156,41 +98,22 @@ function Hero() {
           </div>
         </div>
 
-        {/* RIGHT: mascot card + spec stack */}
         <motion.div style={{ y: yArt }} className="relative lg:col-span-5">
-          {/* main showcase card */}
           <div className="hairline-strong shadow-edge relative overflow-hidden rounded-2xl bg-paper">
             <div className="flex items-center justify-between border-b px-5 py-3 text-[10px] font-mono uppercase tracking-[0.15em] text-muted-foreground">
               <span>Job · TCC-2026-184</span>
               <span className="flex items-center gap-1.5"><span className="h-1.5 w-1.5 rounded-full" style={{ background: "var(--sage)" }} />Running</span>
             </div>
-            <div className="relative px-6 pb-6 pt-4" style={{ background: "linear-gradient(180deg, var(--paper), color-mix(in oklab, var(--ochre) 12%, var(--paper)))" }}>
-              <PrinterDoodle />
-              <div className="mt-2 flex items-end justify-between">
-                <div>
-                  <div className="text-[10px] font-mono uppercase tracking-[0.15em] text-muted-foreground">Now printing</div>
-                  <div className="mt-1 font-display text-xl font-semibold">Architectural set · A0 ×24</div>
-                </div>
-                <div className="font-mono text-xs text-muted-foreground">ETA 14 min</div>
+            <div className="relative aspect-[4/5] overflow-hidden">
+              <img src={svcWide} alt="Wide-format architectural print rolling off the plotter" loading="eager" className="h-full w-full object-cover" />
+              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink/85 via-ink/40 to-transparent p-5 text-ivory">
+                <div className="text-[10px] font-mono uppercase tracking-[0.15em] opacity-70">Now printing</div>
+                <div className="mt-1 font-display text-xl font-semibold">Architectural set · A0 ×24</div>
+                <div className="mt-1 font-mono text-xs opacity-70">ETA 14 min</div>
               </div>
             </div>
           </div>
 
-          {/* spec chip card */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }}
-            className="hairline shadow-soft absolute -bottom-6 -left-6 hidden w-56 rounded-xl bg-paper p-4 sm:block"
-          >
-            <div className="font-marker text-xl" style={{ color: "var(--brick)" }}>spec sheet</div>
-            <ul className="mt-2 space-y-1.5 font-mono text-[11px] text-foreground/80">
-              <li>· 44″ wide / any length</li>
-              <li>· Laser + plotter + UV</li>
-              <li>· Tracing · vinyl · canvas</li>
-              <li>· Same-day for bulk runs</li>
-            </ul>
-          </motion.div>
-
-          {/* small floating badge */}
           <motion.div
             animate={{ rotate: 360 }} transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
             className="absolute -top-6 -right-6 hidden h-24 w-24 md:block"
@@ -209,7 +132,6 @@ function Hero() {
         </motion.div>
       </div>
 
-      {/* marquee strip */}
       <div className="border-y bg-ink text-ivory">
         <div className="flex overflow-hidden whitespace-nowrap py-3 text-xs font-mono uppercase tracking-[0.2em] opacity-90 animate-marquee">
           {Array.from({ length: 2 }).map((_, k) => (
@@ -225,35 +147,8 @@ function Hero() {
   );
 }
 
-function PrinterDoodle() {
-  return (
-    <svg viewBox="0 0 600 360" className="mx-auto w-full max-w-md">
-      {[0, 1, 2].map((i) => (
-        <motion.rect key={i} x={220 + i * 12} y={20 + i * 8} width="160" height="90" rx="4"
-          fill="var(--paper)" stroke="var(--ink)" strokeWidth="2.5"
-          animate={{ y: [20 + i * 8, 6 + i * 8, 20 + i * 8], rotate: [i * -2, i * 2, i * -2] }}
-          transition={{ duration: 3, repeat: Infinity, delay: i * 0.2 }}
-        />
-      ))}
-      <rect x="120" y="140" width="360" height="160" rx="10" fill="var(--ink)" stroke="var(--ink)" strokeWidth="2.5" />
-      <rect x="160" y="180" width="280" height="60" rx="4" fill="var(--ochre)" stroke="var(--ink)" strokeWidth="2" />
-      <circle cx="230" cy="210" r="11" fill="var(--paper)" stroke="var(--ink)" strokeWidth="2" />
-      <circle cx="370" cy="210" r="11" fill="var(--paper)" stroke="var(--ink)" strokeWidth="2" />
-      <motion.circle cx="230" cy="210" r="4" fill="var(--ink)"
-        animate={{ cx: [228, 234, 228], cy: [212, 208, 212] }} transition={{ duration: 4, repeat: Infinity }} />
-      <motion.circle cx="370" cy="210" r="4" fill="var(--ink)"
-        animate={{ cx: [368, 374, 368], cy: [212, 208, 212] }} transition={{ duration: 4, repeat: Infinity }} />
-      <path d="M 270 250 Q 300 265 330 250" stroke="var(--paper)" strokeWidth="3" fill="none" strokeLinecap="round" />
-      <rect x="160" y="300" width="16" height="32" fill="var(--ink)" />
-      <rect x="424" y="300" width="16" height="32" fill="var(--ink)" />
-      <circle cx="450" cy="170" r="5" fill="var(--sage)" stroke="var(--ivory)" strokeWidth="1.5" />
-      <circle cx="450" cy="190" r="5" fill="var(--brick)" stroke="var(--ivory)" strokeWidth="1.5" />
-    </svg>
-  );
-}
-
 /* ============================================================
-   LOGO STRIP
+   CLIENT STRIP
    ============================================================ */
 function ClientStrip() {
   const labels = ["Architects", "Manufacturing", "Hospitals", "Retail Chains", "Real Estate", "Educational Institutions", "Government", "Event Agencies"];
@@ -272,41 +167,44 @@ function ClientStrip() {
 }
 
 /* ============================================================
-   CAPABILITIES (was services) — editorial cards
+   SERVICES (was Capabilities) — image-forward editorial cards
    ============================================================ */
-const CAPABILITIES = [
-  { icon: Printer, title: "Super Jumbo Xerox", desc: "Laser-grade B/W output on paper, tracing, cloth and engineering matte film up to A0+.", tag: "Reprographics" },
-  { icon: Palette, title: "Multi-Color Wide Format", desc: "A4 to A0+ colour. Up to 44″ wide × any length. CAD drawings, project reports, posters.", tag: "Color" },
-  { icon: BookOpen, title: "Binding & Finishing", desc: "Spiral, wiro, soft & hard binding. Thesis-grade finish for technical and legal sets.", tag: "Finishing" },
-  { icon: Scan, title: "Scanning & Plotting", desc: "Colour & B/W high-resolution scanning. 44″ plotting on varied media.", tag: "Digitization" },
-  { icon: Layers, title: "Lamination Systems", desc: "Hot, cold, matte, gloss, sparkle and 3D. Plus delamination of documents and maps.", tag: "Protection" },
-  { icon: Maximize2, title: "Scaling & Reproduction", desc: "Precision enlargement A4 → A0 and faithful reduction A0 → A4 across formats.", tag: "Scaling" },
+const SERVICES = [
+  { img: svcWide, icon: Printer, title: "Super Jumbo Xerox", desc: "Laser-grade B/W output on paper, tracing, cloth and engineering matte film up to A0+.", tag: "Reprographics" },
+  { img: svcColor, icon: Palette, title: "Multi-Color Wide Format", desc: "A4 to A0+ colour. Up to 44″ wide × any length. CAD drawings, project reports, posters.", tag: "Color" },
+  { img: svcBinding, icon: BookOpen, title: "Binding & Finishing", desc: "Spiral, wiro, soft & hard binding. Thesis-grade finish for technical and legal sets.", tag: "Finishing" },
+  { img: svcScan, icon: Scan, title: "Scanning & Plotting", desc: "Colour & B/W high-resolution scanning. 44″ plotting on varied media.", tag: "Digitization" },
+  { img: svcLam, icon: Layers, title: "Lamination Systems", desc: "Hot, cold, matte, gloss, sparkle and 3D. Plus delamination of documents and maps.", tag: "Protection" },
+  { img: svcScaling, icon: Maximize2, title: "Scaling & Reproduction", desc: "Precision enlargement A4 → A0 and faithful reduction A0 → A4 across formats.", tag: "Scaling" },
 ];
 
-function Capabilities() {
+function Services() {
   return (
-    <section id="capabilities" className="py-24 sm:py-32">
+    <section id="services" className="py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
-        <SectionHeader kicker="01 / Capabilities" title="Production-grade output, daily." sub="Six core lines that keep architecture studios, contractors and corporate offices unblocked." />
+        <SectionHeader kicker="01 / Services" title="Production-grade output, daily." sub="Six core lines that keep architecture studios, contractors and corporate offices unblocked." />
 
-        <div className="mt-16 grid gap-px overflow-hidden rounded-2xl bg-border sm:grid-cols-2 lg:grid-cols-3" style={{ border: "1px solid var(--color-border)" }}>
-          {CAPABILITIES.map((s, i) => (
+        <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {SERVICES.map((s, i) => (
             <motion.div
               key={s.title}
               initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-80px" }}
               transition={{ duration: 0.5, delay: (i % 3) * 0.08 }}
-              className="group relative bg-paper p-7 transition hover:bg-[color-mix(in_oklab,var(--ochre)_10%,var(--paper))]"
+              className="hairline-strong group overflow-hidden rounded-2xl bg-paper shadow-soft transition hover:shadow-edge"
             >
-              <div className="flex items-start justify-between">
-                <div className="hairline grid h-11 w-11 place-items-center rounded-lg" style={{ background: "color-mix(in oklab, var(--ochre) 18%, var(--paper))" }}>
-                  <s.icon className="h-5 w-5" />
+              <div className="relative aspect-[4/3] overflow-hidden">
+                <img src={s.img} alt={s.title} loading="lazy" className="h-full w-full object-cover transition duration-700 group-hover:scale-105" />
+                <div className="absolute left-3 top-3 rounded-md bg-ink/85 px-2.5 py-1 font-mono text-[10px] uppercase tracking-wider text-ivory">{s.tag}</div>
+                <div className="absolute right-3 bottom-3 grid h-10 w-10 place-items-center rounded-full bg-paper/95 backdrop-blur">
+                  <s.icon className="h-4.5 w-4.5" />
                 </div>
-                <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-muted-foreground">{s.tag}</span>
               </div>
-              <h3 className="mt-6 font-display text-2xl font-medium">{s.title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{s.desc}</p>
-              <div className="mt-6 flex items-center gap-1.5 text-xs font-medium opacity-0 transition group-hover:opacity-100" style={{ color: "var(--brick)" }}>
-                Discuss this line <ArrowRight className="h-3.5 w-3.5" />
+              <div className="p-6">
+                <h3 className="font-display text-2xl font-medium">{s.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{s.desc}</p>
+                <div className="mt-5 flex items-center gap-1.5 text-xs font-medium opacity-0 transition group-hover:opacity-100" style={{ color: "var(--brick)" }}>
+                  Discuss this line <ArrowRight className="h-3.5 w-3.5" />
+                </div>
               </div>
             </motion.div>
           ))}
@@ -317,27 +215,17 @@ function Capabilities() {
 }
 
 /* ============================================================
-   CAPABILITY MATRIX (was wheel) — editorial reframe
+   CAPABILITY WHEEL — circular representation of every work
    ============================================================ */
 const MATRIX = [
-  { label: "Custom Wallpaper", color: "var(--brick)" },
-  { label: "Envelopes", color: "var(--ochre)" },
-  { label: "Canvas", color: "var(--brick)" },
-  { label: "Banners", color: "var(--teal)" },
-  { label: "Satin Flags", color: "var(--sage)" },
-  { label: "UV & Foiling", color: "var(--ink)" },
-  { label: "Die-Cut Stickers", color: "var(--ink)" },
-  { label: "Fine-Art Prints", color: "var(--brick)" },
-  { label: "Foamsheet", color: "var(--sage)" },
-  { label: "Vinyl", color: "var(--brick)" },
-  { label: "Signage Systems", color: "var(--ochre)" },
-  { label: "Standees", color: "var(--sage)" },
-  { label: "Reflective Vinyl", color: "var(--ink-soft)" },
-  { label: "Posters", color: "var(--ink)" },
-  { label: "Flags", color: "var(--ink)" },
+  "Custom Wallpaper", "Envelopes", "Canvas", "Banners", "Satin Flags",
+  "UV & Foiling", "Die-Cut Stickers", "Fine-Art Prints", "Foamsheet",
+  "Vinyl", "Signage Systems", "Standees", "Reflective Vinyl", "Posters",
+  "Flags", "Frosted Films", "Rollup", "One-Way Vision",
 ];
 
-function Matrix() {
+function Wheel() {
+  const R = 220;
   return (
     <section className="relative overflow-hidden border-y bg-ink py-24 text-ivory sm:py-32">
       <div aria-hidden className="pointer-events-none absolute inset-0 dot-bg opacity-20" />
@@ -346,30 +234,71 @@ function Matrix() {
           <div className="font-marker text-2xl" style={{ color: "var(--ochre)" }}>(yes, all of it)</div>
           <h2 className="mt-2 font-display text-5xl font-medium leading-[0.95] sm:text-6xl">
             One vendor.<br />
-            <span className="italic" style={{ color: "var(--ochre)" }}>Fifteen</span> output formats.
+            <span className="italic" style={{ color: "var(--ochre)" }}>Eighteen</span> output formats.
           </h2>
           <p className="mt-6 max-w-md leading-relaxed text-ivory/70">
-            Most clients consolidate three to five existing print suppliers into us. Single point of
+            Most clients consolidate three to five print suppliers into us. Single point of
             contact, one PO, one invoice — across reprographics, large format, signage, and interiors.
           </p>
-          <a href="#contact" className="mt-8 inline-flex items-center gap-2 rounded-full bg-ochre px-5 py-3 text-sm font-medium text-ink transition hover:bg-ivory" style={{ background: "var(--ochre)" }}>
+          <a href="#contact" className="mt-8 inline-flex items-center gap-2 rounded-full px-5 py-3 text-sm font-medium text-ink transition hover:opacity-90" style={{ background: "var(--ochre)" }}>
             Consolidate your print stack <ArrowRight className="h-4 w-4" />
           </a>
         </div>
 
         <div className="lg:col-span-7">
-          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
-            {MATRIX.map((m, i) => (
+          <div className="relative mx-auto aspect-square w-full max-w-[520px]">
+            {/* rotating rings */}
+            <motion.div
+              animate={{ rotate: 360 }} transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
+              className="absolute inset-0"
+            >
+              <svg viewBox="-260 -260 520 520" className="h-full w-full">
+                <circle cx="0" cy="0" r={R} fill="none" stroke="var(--ivory)" strokeOpacity="0.15" strokeDasharray="2 6" />
+                <circle cx="0" cy="0" r={R - 50} fill="none" stroke="var(--ivory)" strokeOpacity="0.1" />
+              </svg>
+            </motion.div>
+
+            <motion.div
+              animate={{ rotate: 360 }} transition={{ duration: 90, repeat: Infinity, ease: "linear" }}
+              className="absolute inset-0"
+            >
+              {MATRIX.map((label, i) => {
+                const angle = (i / MATRIX.length) * 2 * Math.PI - Math.PI / 2;
+                const x = Math.cos(angle) * R;
+                const y = Math.sin(angle) * R;
+                return (
+                  <motion.div
+                    key={label}
+                    animate={{ rotate: -360 }} transition={{ duration: 90, repeat: Infinity, ease: "linear" }}
+                    className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+                    style={{ transform: `translate(calc(-50% + ${x}px), calc(-50% + ${y}px))` }}
+                  >
+                    <div className="hairline-strong whitespace-nowrap rounded-full bg-ivory/5 px-3 py-1.5 text-[11px] font-medium backdrop-blur transition hover:bg-ochre hover:text-ink" style={{ borderColor: "rgba(255,255,255,0.2)" }}>
+                      {label}
+                    </div>
+                  </motion.div>
+                );
+              })}
+            </motion.div>
+
+            {/* center hub */}
+            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+              <div className="hairline-strong grid h-40 w-40 place-items-center rounded-full bg-ivory/5 text-center backdrop-blur" style={{ borderColor: "rgba(255,255,255,0.3)" }}>
+                <div>
+                  <div className="font-marker text-lg" style={{ color: "var(--ochre)" }}>we print</div>
+                  <div className="font-display text-3xl font-semibold leading-tight">Every-<br />thing</div>
+                </div>
+              </div>
+            </div>
+
+            {/* pulses */}
+            {[0, 1, 2].map((i) => (
               <motion.div
-                key={m.label}
-                initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-                transition={{ delay: i * 0.03 }}
-                whileHover={{ y: -3 }}
-                className="group flex items-center justify-between rounded-md border border-ivory/15 bg-ivory/5 px-4 py-3 backdrop-blur transition hover:border-ivory/40 hover:bg-ivory/10"
-              >
-                <span className="text-sm font-medium">{m.label}</span>
-                <span className="h-2 w-2 rounded-full transition group-hover:scale-150" style={{ background: m.color }} />
-              </motion.div>
+                key={i}
+                className="absolute left-1/2 top-1/2 h-40 w-40 -translate-x-1/2 -translate-y-1/2 rounded-full border border-ochre/40"
+                animate={{ scale: [1, 2.2], opacity: [0.5, 0] }}
+                transition={{ duration: 3, repeat: Infinity, delay: i * 1 }}
+              />
             ))}
           </div>
         </div>
@@ -379,7 +308,7 @@ function Matrix() {
 }
 
 /* ============================================================
-   INDUSTRIES SERVED
+   INDUSTRIES — with visual
    ============================================================ */
 const INDUSTRIES = [
   { icon: Building2, name: "Architecture & AEC", desc: "Plotted GFC sets, tender drawings, presentation boards." },
@@ -395,72 +324,31 @@ function Industries() {
     <section id="industries" className="py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <SectionHeader kicker="02 / Industries" title="Built for procurement teams." sub="Repeatable specifications, predictable lead times, and a paper trail that survives an audit." />
-        <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {INDUSTRIES.map((it, i) => (
-            <motion.div
-              key={it.name}
-              initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: (i % 3) * 0.08 }}
-              className="hairline group rounded-xl bg-paper p-6 transition hover:shadow-edge"
-            >
-              <div className="flex items-center gap-3">
-                <div className="grid h-9 w-9 place-items-center rounded-md" style={{ background: "color-mix(in oklab, var(--teal) 15%, var(--paper))" }}>
-                  <it.icon className="h-4.5 w-4.5" />
-                </div>
-                <div className="font-display text-xl font-medium">{it.name}</div>
-              </div>
-              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{it.desc}</p>
-            </motion.div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
 
-/* ============================================================
-   BIG STUFF — industrial + interior
-   ============================================================ */
-const INDUSTRIAL = [
-  { icon: Shield, title: "Safety Signage" },
-  { icon: Layers, title: "Vinyl + Foamsheet" },
-  { icon: Megaphone, title: "Rollup Standees" },
-  { icon: Flag, title: "Flex / Cloth / Banners" },
-  { icon: Sparkle, title: "Retro-Reflective Vinyl" },
-  { icon: Lightbulb, title: "Glow-In-The-Dark" },
-  { icon: Stamp, title: "Print + Cut Stickers" },
-];
-const INTERIOR = [
-  { icon: ImageIcon, title: "Canvas Prints" },
-  { icon: Wallpaper, title: "Custom Wallpapers" },
-  { icon: MonitorSmartphone, title: "Window / Frosted Films" },
-  { icon: Layers, title: "Vinyl / Rexine" },
-  { icon: Frame, title: "Poster Printing" },
-  { icon: ImageIcon, title: "One-Way Vision" },
-  { icon: Palette, title: "Monochrome Paintings" },
-];
-
-function Sparkle(props: React.SVGProps<SVGSVGElement>) {
-  return <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" {...props}><path d="M12 2l2.4 7.2L22 12l-7.6 2.8L12 22l-2.4-7.2L2 12l7.6-2.8L12 2z" /></svg>;
-}
-
-function BigStuff() {
-  return (
-    <section className="border-y bg-[color-mix(in_oklab,var(--ochre)_8%,var(--ivory))] py-24 sm:py-32">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6">
-        <SectionHeader kicker="03 / Large format" title="Goes big. Goes outside." sub="From the factory wall to the highway hoarding." />
-
-        <div className="mt-14 grid gap-12 lg:grid-cols-2">
-          <div>
-            <div className="font-mono text-xs uppercase tracking-[0.18em] text-muted-foreground">Industrial applications</div>
-            <div className="mt-5 flex flex-wrap gap-2.5">
-              {INDUSTRIAL.map((s, i) => <Chip key={s.title} {...s} i={i} variant="ink" />)}
+        <div className="mt-14 grid gap-8 lg:grid-cols-12">
+          <div className="lg:col-span-5">
+            <div className="hairline-strong shadow-edge sticky top-24 overflow-hidden rounded-2xl">
+              <img src={indProc} alt="Procurement team reviewing printed drawings" loading="lazy" className="h-full w-full object-cover" />
             </div>
           </div>
-          <div>
-            <div className="font-mono text-xs uppercase tracking-[0.18em] text-muted-foreground">Interior applications</div>
-            <div className="mt-5 flex flex-wrap gap-2.5">
-              {INTERIOR.map((s, i) => <Chip key={s.title} {...s} i={i} variant="paper" />)}
+          <div className="lg:col-span-7">
+            <div className="grid gap-4 sm:grid-cols-2">
+              {INDUSTRIES.map((it, i) => (
+                <motion.div
+                  key={it.name}
+                  initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: (i % 3) * 0.06 }}
+                  className="hairline group rounded-xl bg-paper p-5 transition hover:shadow-edge"
+                >
+                  <div className="flex items-center gap-3">
+                    <div className="grid h-9 w-9 place-items-center rounded-md" style={{ background: "color-mix(in oklab, var(--teal) 15%, var(--paper))" }}>
+                      <it.icon className="h-4 w-4" />
+                    </div>
+                    <div className="font-display text-lg font-medium">{it.name}</div>
+                  </div>
+                  <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{it.desc}</p>
+                </motion.div>
+              ))}
             </div>
           </div>
         </div>
@@ -469,52 +357,53 @@ function BigStuff() {
   );
 }
 
-function Chip({ icon: Icon, title, i, variant }: { icon: React.ComponentType<{ className?: string }>; title: string; i: number; variant: "ink" | "paper" }) {
-  const dark = variant === "ink";
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-      transition={{ delay: i * 0.04 }}
-      whileHover={{ y: -2 }}
-      className={`hairline-strong inline-flex items-center gap-2 rounded-full px-4 py-2.5 text-sm font-medium transition ${dark ? "bg-ink text-ivory hover:bg-ink/90" : "bg-paper hover:bg-ink hover:text-ivory"}`}
-      style={dark ? { background: "var(--ink)", color: "var(--ivory)" } : {}}
-    >
-      <Icon className="h-4 w-4" />
-      {title}
-    </motion.div>
-  );
-}
-
 /* ============================================================
-   PROCESS
+   LARGE FORMAT — Goes big. Goes outside.
    ============================================================ */
-function Process() {
-  const steps = [
-    { n: "01", t: "Brief", d: "Send a file, drawing pack or scope. We confirm material, finish and lead time the same day." },
-    { n: "02", t: "Proof", d: "Hard proof or PDF preview on request. Spec sheet locked before the line runs." },
-    { n: "03", t: "Produce", d: "Output on the right machine — laser, plotter, UV, or wide-format — under UPS-backed power." },
-    { n: "04", t: "Deliver", d: "Pickup, courier or site delivery anywhere in Nagpur. Invoiced with GST." },
-  ];
+function LargeFormat() {
   return (
-    <section id="process" className="py-24 sm:py-32">
+    <section id="large-format" className="border-y bg-[color-mix(in_oklab,var(--ochre)_8%,var(--ivory))] py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
-        <SectionHeader kicker="04 / Process" title="Brief on Monday. On-site Wednesday." sub="No mystery. No middlemen. Just a tight production workflow." />
-        <div className="mt-16 grid gap-px overflow-hidden rounded-2xl border md:grid-cols-4">
-          {steps.map((s, i) => (
-            <motion.div
-              key={s.n}
-              initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
-              className="relative bg-paper p-7"
-            >
-              <div className="flex items-center justify-between">
-                <span className="font-mono text-xs uppercase tracking-[0.2em] text-muted-foreground">Step {s.n}</span>
-                {i < 3 && <ArrowRight className="hidden h-4 w-4 text-muted-foreground md:block" />}
+        <SectionHeader kicker="03 / Large format" title="Goes big. Goes outside." sub="From the factory wall to the highway hoarding — and from the boardroom feature-wall to the boutique cafe." />
+
+        <div className="mt-14 grid gap-6 lg:grid-cols-12">
+          <motion.figure
+            initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+            className="hairline-strong shadow-soft group overflow-hidden rounded-2xl bg-paper lg:col-span-7"
+          >
+            <div className="relative aspect-[4/3] overflow-hidden lg:aspect-[16/10]">
+              <img src={bigHoard} alt="Large printed hoarding installed on a building" loading="lazy" className="h-full w-full object-cover transition duration-700 group-hover:scale-105" />
+              <div className="absolute left-4 top-4 rounded-md bg-ink/85 px-2.5 py-1 font-mono text-[10px] uppercase tracking-wider text-ivory">Industrial</div>
+            </div>
+            <figcaption className="p-6">
+              <div className="font-display text-2xl font-medium">Building hoardings, safety signage, banners</div>
+              <p className="mt-2 text-sm text-muted-foreground">Flex, star-flex, vinyl on foamsheet, retro-reflective and glow-in-the-dark systems. Installed or supplied ready-to-hang.</p>
+              <div className="mt-4 flex flex-wrap gap-2">
+                {["Safety signage", "Flex banners", "Reflective vinyl", "Rollup standees", "Glow-in-dark"].map((t) => (
+                  <span key={t} className="hairline rounded-full bg-paper px-3 py-1 text-xs">{t}</span>
+                ))}
               </div>
-              <h3 className="mt-5 font-display text-2xl font-medium">{s.t}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{s.d}</p>
-            </motion.div>
-          ))}
+            </figcaption>
+          </motion.figure>
+
+          <motion.figure
+            initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }}
+            className="hairline-strong shadow-soft group overflow-hidden rounded-2xl bg-paper lg:col-span-5"
+          >
+            <div className="relative aspect-[4/3] overflow-hidden lg:aspect-[4/5]">
+              <img src={bigWall} alt="Custom printed wallpaper in an interior" loading="lazy" className="h-full w-full object-cover transition duration-700 group-hover:scale-105" />
+              <div className="absolute left-4 top-4 rounded-md bg-ink/85 px-2.5 py-1 font-mono text-[10px] uppercase tracking-wider text-ivory">Interior</div>
+            </div>
+            <figcaption className="p-6">
+              <div className="font-display text-2xl font-medium">Wallpapers, canvas, frosted films</div>
+              <p className="mt-2 text-sm text-muted-foreground">Custom wallpapers, gallery canvas, frosted & one-way vision films — for cafes, boutiques, sample-flats and boardrooms.</p>
+              <div className="mt-4 flex flex-wrap gap-2">
+                {["Wallpaper", "Canvas", "Frosted film", "One-way vision", "Poster"].map((t) => (
+                  <span key={t} className="hairline rounded-full bg-paper px-3 py-1 text-xs">{t}</span>
+                ))}
+              </div>
+            </figcaption>
+          </motion.figure>
         </div>
       </div>
     </section>
@@ -522,9 +411,9 @@ function Process() {
 }
 
 /* ============================================================
-   SPECS / WHY US
+   ABOUT US (was Specs / Why us) — visualized
    ============================================================ */
-function Specs() {
+function About() {
   const items = [
     { icon: Zap, t: "UPS-backed floor", d: "Power cuts do not enter our SLA. Lines stay live, deadlines stay intact." },
     { icon: Clock, t: "Same-day capacity", d: "Walk-in bulk runs cleared the same day for repeat accounts." },
@@ -532,21 +421,57 @@ function Specs() {
     { icon: CheckCircle2, t: "GST-compliant billing", d: "Clean invoices, PO support, monthly statements for procurement." },
   ];
   return (
-    <section id="specs" className="border-t bg-paper py-24 sm:py-32">
+    <section id="about" className="border-t bg-paper py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
-        <SectionHeader kicker="05 / Why us" title="The boring things, done right." sub="The reasons procurement teams keep our number on speed-dial." />
-        <div className="mt-14 grid gap-px overflow-hidden rounded-2xl border sm:grid-cols-2 lg:grid-cols-4">
-          {items.map((it, i) => (
-            <motion.div key={it.t}
-              initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-              transition={{ delay: i * 0.08 }}
-              className="bg-paper p-7"
-            >
-              <it.icon className="h-6 w-6" style={{ color: "var(--brick)" }} />
-              <div className="mt-5 font-display text-xl font-medium">{it.t}</div>
-              <div className="mt-2 text-sm leading-relaxed text-muted-foreground">{it.d}</div>
-            </motion.div>
-          ))}
+        <div className="grid gap-14 lg:grid-cols-12">
+          <div className="lg:col-span-5">
+            <div className="font-mono text-xs uppercase tracking-[0.2em] text-muted-foreground">04 / About us</div>
+            <h2 className="mt-4 font-display text-4xl font-medium leading-[1.02] tracking-tight sm:text-5xl md:text-6xl">
+              Two decades on the floor. <em className="italic" style={{ color: "var(--brick)" }}>One promise:</em> we deliver.
+            </h2>
+            <p className="mt-6 text-lg leading-relaxed text-muted-foreground">
+              True Copy Centre started as a neighbourhood print shop in Dhantoli and grew into
+              Central India's B2B production partner. What hasn't changed: the person picking
+              up the phone is the same person on the floor when your job runs.
+            </p>
+
+            <div className="mt-8 hairline-strong overflow-hidden rounded-2xl">
+              <img src={aboutCraft} alt="Craftsman inspecting a fresh print" loading="lazy" className="h-full w-full object-cover" />
+            </div>
+          </div>
+
+          <div className="lg:col-span-7">
+            <div className="grid gap-4 sm:grid-cols-2">
+              {items.map((it, i) => (
+                <motion.div key={it.t}
+                  initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+                  transition={{ delay: i * 0.08 }}
+                  className="hairline-strong group relative overflow-hidden rounded-2xl bg-paper p-6 shadow-soft transition hover:shadow-edge"
+                >
+                  <div className="grid h-12 w-12 place-items-center rounded-xl" style={{ background: "color-mix(in oklab, var(--brick) 12%, var(--paper))" }}>
+                    <it.icon className="h-5 w-5" style={{ color: "var(--brick)" }} />
+                  </div>
+                  <div className="mt-5 font-display text-xl font-medium">{it.t}</div>
+                  <div className="mt-2 text-sm leading-relaxed text-muted-foreground">{it.d}</div>
+                  <div aria-hidden className="pointer-events-none absolute -bottom-16 -right-16 h-40 w-40 rounded-full opacity-0 transition group-hover:opacity-100" style={{ background: "radial-gradient(circle, var(--ochre), transparent 70%)" }} />
+                </motion.div>
+              ))}
+            </div>
+
+            {/* mini stats strip */}
+            <div className="mt-6 hairline-strong grid grid-cols-3 divide-x divide-border overflow-hidden rounded-2xl bg-ink text-ivory">
+              {[
+                { k: "20+", v: "Years on the floor" },
+                { k: "1000+", v: "B2B accounts" },
+                { k: "18", v: "Output formats" },
+              ].map((s) => (
+                <div key={s.v} className="p-6">
+                  <div className="font-display text-3xl font-semibold tabular">{s.k}</div>
+                  <div className="mt-1 font-mono text-[10px] uppercase tracking-wider opacity-70">{s.v}</div>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -563,7 +488,7 @@ function Contact() {
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6">
         <div className="grid gap-12 lg:grid-cols-12">
           <div className="lg:col-span-6">
-            <div className="font-mono text-xs uppercase tracking-[0.2em] text-ivory/60">06 / Contact</div>
+            <div className="font-mono text-xs uppercase tracking-[0.2em] text-ivory/60">05 / Contact</div>
             <h2 className="mt-3 font-display text-5xl font-medium leading-[0.95] sm:text-6xl">
               Start a job, <em className="italic" style={{ color: "var(--ochre)" }}>open an account</em>, or send a tender file.
             </h2>
@@ -718,8 +643,8 @@ function Footer() {
           </div>
 
           <div className="grid gap-8 sm:grid-cols-3 lg:col-span-7">
-            <FooterCol title="Capabilities" links={["Wide-format CAD", "Signage systems", "Interior graphics", "Reprographics", "UV & foiling"]} />
-            <FooterCol title="Company" links={["Industries", "Process", "Specs", "Contact"]} />
+            <FooterCol title="Services" links={["Wide-format CAD", "Signage systems", "Interior graphics", "Reprographics", "UV & foiling"]} />
+            <FooterCol title="Company" links={["Industries", "Large Format", "About Us", "Student Work", "Contact"]} />
             <FooterCol title="Reach us" links={["+91 98222 24644", "WhatsApp: 72761 41392", "truecopycentre@gmail.com", "Dhantoli, Nagpur 440012"]} />
           </div>
         </div>
@@ -756,12 +681,11 @@ function Index() {
       <Nav />
       <Hero />
       <ClientStrip />
-      <Capabilities />
-      <Matrix />
+      <Services />
+      <Wheel />
       <Industries />
-      <BigStuff />
-      <Process />
-      <Specs />
+      <LargeFormat />
+      <About />
       <Contact />
       <Footer />
     </main>
