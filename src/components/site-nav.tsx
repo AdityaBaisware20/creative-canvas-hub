@@ -25,12 +25,11 @@ export function UtilityBar() {
 }
 
 const LINKS: Array<{ label: string; to: string; hash?: string }> = [
+  { label: "About Us", to: "/", hash: "about" },
   { label: "Services", to: "/", hash: "services" },
   { label: "Industries", to: "/", hash: "industries" },
   { label: "Large Format", to: "/", hash: "large-format" },
-  { label: "About Us", to: "/", hash: "about" },
   { label: "Student Work", to: "/student" },
-  { label: "Contact", to: "/", hash: "contact" },
 ];
 
 export function Nav() {
