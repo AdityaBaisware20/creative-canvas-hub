@@ -1,10 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import {
   Printer, Scan, BookOpen, Layers, Maximize2,
   MapPin, Phone, MessageCircle, Mail as MailIcon,
   ArrowUpRight, ArrowRight, CheckCircle2, Factory, Building2, Hospital, GraduationCap, ShoppingBag, Hammer, Zap, Clock, Award, Palette,
+  Ruler, Map as MapIcon, AlertTriangle, Compass, Tag, HardHat,
 } from "lucide-react";
 import { Nav, UtilityBar } from "@/components/site-nav";
 
@@ -14,10 +15,23 @@ import svcBinding from "@/assets/svc-binding.jpg";
 import svcScan from "@/assets/svc-scan.jpg";
 import svcLam from "@/assets/svc-lamination.jpg";
 import svcScaling from "@/assets/svc-scaling.jpg";
-import indProc from "@/assets/ind-procurement.jpg";
 import bigHoard from "@/assets/big-hoarding.jpg";
 import bigWall from "@/assets/big-wallpaper.jpg";
 import aboutCraft from "@/assets/about-craft.jpg";
+import aboutFloor from "@/assets/about-floor.jpg";
+import aboutHands from "@/assets/about-hands.jpg";
+import heroMain from "@/assets/hero-main.jpg";
+import indArch from "@/assets/ind-architecture.jpg";
+import indMfg from "@/assets/ind-manufacturing.jpg";
+import indHosp from "@/assets/ind-hospital.jpg";
+import indEdu from "@/assets/ind-education.jpg";
+import indRetail from "@/assets/ind-retail.jpg";
+import indRealEstate from "@/assets/ind-realestate.jpg";
+import bigStandee from "@/assets/big-standee.jpg";
+import bigVinyl from "@/assets/big-vinyl.jpg";
+import bigCanvas from "@/assets/big-canvas.jpg";
+import bigSignage from "@/assets/big-signage.jpg";
+import bigWrap from "@/assets/big-wrap.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -32,36 +46,51 @@ export const Route = createFileRoute("/")({
 });
 
 /* ============================================================
-   HERO
+   HERO — reimagined editorial
    ============================================================ */
 function Hero() {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
-  const yArt = useTransform(scrollYProgress, [0, 1], [0, -80]);
+  const yArt = useTransform(scrollYProgress, [0, 1], [0, -100]);
+  const yBadge = useTransform(scrollYProgress, [0, 1], [0, 60]);
 
   return (
     <section id="top" ref={ref} className="relative overflow-hidden">
       <div aria-hidden className="pointer-events-none absolute inset-0 grid-bg opacity-60" />
       <div aria-hidden className="pointer-events-none absolute -right-40 -top-40 h-[40rem] w-[40rem] rounded-full opacity-30 blur-3xl" style={{ background: "radial-gradient(circle, var(--ochre), transparent 60%)" }} />
+      <div aria-hidden className="pointer-events-none absolute -left-40 top-1/3 h-[30rem] w-[30rem] rounded-full opacity-20 blur-3xl" style={{ background: "radial-gradient(circle, var(--brick), transparent 60%)" }} />
 
-      <div className="relative mx-auto grid max-w-7xl gap-12 px-4 pt-16 pb-24 sm:px-6 sm:pt-24 sm:pb-32 lg:grid-cols-12">
+      <div className="relative mx-auto grid max-w-7xl gap-12 px-4 pt-12 pb-24 sm:px-6 sm:pt-20 sm:pb-32 lg:grid-cols-12">
         <div className="lg:col-span-7">
           <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}
             className="hairline inline-flex items-center gap-2 rounded-full bg-paper px-3 py-1.5 text-xs font-medium">
-            <span className="h-1.5 w-1.5 rounded-full" style={{ background: "var(--brick)" }} />
+            <span className="relative flex h-1.5 w-1.5">
+              <span className="absolute inset-0 animate-ping rounded-full opacity-75" style={{ background: "var(--brick)" }} />
+              <span className="relative h-1.5 w-1.5 rounded-full" style={{ background: "var(--brick)" }} />
+            </span>
             B2B Print Production · Central India
           </motion.div>
 
           <motion.h1
             initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.05 }}
-            className="mt-6 font-display text-[clamp(2.6rem,7vw,5.5rem)] font-medium leading-[0.98] tracking-tight"
+            className="mt-6 font-display text-[clamp(2.6rem,7.5vw,6rem)] font-medium leading-[0.95] tracking-tight"
           >
-            The print partner that <em className="italic" style={{ color: "var(--brick)" }}>actually</em> ships on Monday.
+            The print partner that <em className="italic" style={{ color: "var(--brick)" }}>actually</em>
+            <br />
+            <span className="relative inline-block">
+              ships on Monday.
+              <motion.svg
+                initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 1.2, delay: 0.9 }}
+                viewBox="0 0 400 20" className="absolute -bottom-2 left-0 h-3 w-full" preserveAspectRatio="none"
+              >
+                <motion.path d="M 5 12 Q 100 4 200 10 T 395 8" fill="none" stroke="var(--ochre)" strokeWidth="4" strokeLinecap="round" />
+              </motion.svg>
+            </span>
           </motion.h1>
 
           <motion.p
             initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.15 }}
-            className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground"
+            className="mt-8 max-w-xl text-lg leading-relaxed text-muted-foreground"
           >
             Wide-format CAD, industrial signage, interior graphics and bulk reprographics for
             architects, manufacturers, hospitals and retail chains. Backed by enterprise-grade
@@ -98,37 +127,62 @@ function Hero() {
           </div>
         </div>
 
+        {/* HERO ART — collage */}
         <motion.div style={{ y: yArt }} className="relative lg:col-span-5">
-          <div className="hairline-strong shadow-edge relative overflow-hidden rounded-2xl bg-paper">
-            <div className="flex items-center justify-between border-b px-5 py-3 text-[10px] font-mono uppercase tracking-[0.15em] text-muted-foreground">
-              <span>Job · TCC-2026-184</span>
-              <span className="flex items-center gap-1.5"><span className="h-1.5 w-1.5 rounded-full" style={{ background: "var(--sage)" }} />Running</span>
-            </div>
-            <div className="relative aspect-[4/5] overflow-hidden">
-              <img src={svcWide} alt="Wide-format architectural print rolling off the plotter" loading="eager" className="h-full w-full object-cover" />
-              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink/85 via-ink/40 to-transparent p-5 text-ivory">
-                <div className="text-[10px] font-mono uppercase tracking-[0.15em] opacity-70">Now printing</div>
-                <div className="mt-1 font-display text-xl font-semibold">Architectural set · A0 ×24</div>
-                <div className="mt-1 font-mono text-xs opacity-70">ETA 14 min</div>
+          <div className="relative">
+            {/* main image */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.96 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8 }}
+              className="hairline-strong shadow-edge relative overflow-hidden rounded-2xl bg-paper"
+            >
+              <div className="flex items-center justify-between border-b px-5 py-3 text-[10px] font-mono uppercase tracking-[0.15em] text-muted-foreground">
+                <span>Job · TCC-2026-184</span>
+                <span className="flex items-center gap-1.5"><span className="h-1.5 w-1.5 rounded-full" style={{ background: "var(--sage)" }} />Running</span>
               </div>
-            </div>
-          </div>
+              <div className="relative aspect-[4/5] overflow-hidden">
+                <img src={heroMain} alt="True Copy Centre production floor with wide-format prints" loading="eager" className="h-full w-full object-cover" />
+                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink/90 via-ink/40 to-transparent p-5 text-ivory">
+                  <div className="text-[10px] font-mono uppercase tracking-[0.15em] opacity-70">Now printing</div>
+                  <div className="mt-1 font-display text-xl font-semibold">Architectural set · A0 ×24</div>
+                  <div className="mt-1 font-mono text-xs opacity-70">ETA 14 min</div>
+                </div>
+              </div>
+            </motion.div>
 
-          <motion.div
-            animate={{ rotate: 360 }} transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
-            className="absolute -top-6 -right-6 hidden h-24 w-24 md:block"
-          >
-            <svg viewBox="0 0 100 100" className="h-full w-full">
-              <defs>
-                <path id="circ-h" d="M 50,50 m -36,0 a 36,36 0 1,1 72,0 a 36,36 0 1,1 -72,0" />
-              </defs>
-              <circle cx="50" cy="50" r="48" fill="var(--ink)" />
-              <text fill="var(--ivory)" fontSize="8.5" fontWeight="600" letterSpacing="2.5" fontFamily="JetBrains Mono">
-                <textPath href="#circ-h">· UPS BACKED · DEADLINE DRIVEN · SINCE FOREVER </textPath>
-              </text>
-              <text x="50" y="55" textAnchor="middle" fontSize="14" fontFamily="Fraunces" fontWeight="600" fill="var(--ochre)">TCC</text>
-            </svg>
-          </motion.div>
+            {/* floating secondary card */}
+            <motion.div
+              initial={{ opacity: 0, x: 40, rotate: 6 }} animate={{ opacity: 1, x: 0, rotate: 6 }} transition={{ duration: 0.7, delay: 0.3 }}
+              className="hairline-strong absolute -bottom-8 -left-6 hidden w-44 overflow-hidden rounded-xl bg-paper shadow-edge sm:block"
+            >
+              <img src={svcWide} alt="Wide-format print" className="h-24 w-full object-cover" />
+              <div className="p-3">
+                <div className="font-mono text-[9px] uppercase tracking-widest text-muted-foreground">Plot · A0</div>
+                <div className="mt-0.5 font-display text-sm font-medium">GFC drawings</div>
+              </div>
+            </motion.div>
+
+            {/* spinning badge */}
+            <motion.div
+              style={{ y: yBadge }}
+              className="absolute -top-6 -right-6 hidden h-28 w-28 md:block"
+            >
+              <motion.svg
+                animate={{ rotate: 360 }} transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
+                viewBox="0 0 100 100" className="h-full w-full"
+              >
+                <defs>
+                  <path id="circ-h" d="M 50,50 m -36,0 a 36,36 0 1,1 72,0 a 36,36 0 1,1 -72,0" />
+                </defs>
+                <circle cx="50" cy="50" r="48" fill="var(--ink)" />
+                <text fill="var(--ivory)" fontSize="8.5" fontWeight="600" letterSpacing="2.5" fontFamily="JetBrains Mono">
+                  <textPath href="#circ-h">· UPS BACKED · DEADLINE DRIVEN · SINCE FOREVER </textPath>
+                </text>
+              </motion.svg>
+              <div className="pointer-events-none absolute inset-0 grid place-items-center">
+                <span className="font-display text-lg font-semibold" style={{ color: "var(--ochre)" }}>TCC</span>
+              </div>
+            </motion.div>
+          </div>
         </motion.div>
       </div>
 
@@ -167,7 +221,119 @@ function ClientStrip() {
 }
 
 /* ============================================================
-   SERVICES (was Capabilities) — image-forward editorial cards
+   ABOUT US — moved directly below hero, structured, visualized
+   ============================================================ */
+function About() {
+  const items = [
+    { icon: Zap, t: "UPS-backed floor", d: "Power cuts do not enter our SLA. Lines stay live, deadlines stay intact." },
+    { icon: Clock, t: "Same-day capacity", d: "Walk-in bulk runs cleared the same day for repeat accounts." },
+    { icon: Award, t: "Material specialists", d: "Tracing, garware film, vinyl, canvas, foamsheet, acrylic — paired to the right press." },
+    { icon: CheckCircle2, t: "GST-compliant billing", d: "Clean invoices, PO support, monthly statements for procurement." },
+  ];
+  return (
+    <section id="about" className="relative border-b bg-paper py-24 sm:py-32">
+      <div aria-hidden className="pointer-events-none absolute inset-0 dot-bg opacity-30" />
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6">
+        <div className="grid gap-14 lg:grid-cols-12">
+          <div className="lg:col-span-5">
+            <div className="font-mono text-xs uppercase tracking-[0.2em] text-muted-foreground">01 / About us</div>
+            <h2 className="mt-4 font-display text-4xl font-medium leading-[1.02] tracking-tight sm:text-5xl md:text-6xl">
+              Two decades on the floor. <em className="italic" style={{ color: "var(--brick)" }}>One promise:</em> we deliver.
+            </h2>
+            <p className="mt-6 text-lg leading-relaxed text-muted-foreground">
+              True Copy Centre started as a neighbourhood print shop in Dhantoli and grew into
+              Central India's B2B production partner. What hasn't changed: the person picking
+              up the phone is the same person on the floor when your job runs.
+            </p>
+
+            {/* structured photo collage */}
+            <div className="mt-10 grid grid-cols-6 gap-3">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+                className="hairline-strong col-span-4 overflow-hidden rounded-xl shadow-soft"
+              >
+                <img src={aboutFloor} alt="Production floor" loading="lazy" className="aspect-[4/3] h-full w-full object-cover" />
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }}
+                className="hairline-strong col-span-2 overflow-hidden rounded-xl shadow-soft"
+              >
+                <img src={aboutHands} alt="Craftsman hands binding" loading="lazy" className="h-full w-full object-cover" />
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }}
+                className="hairline-strong col-span-3 overflow-hidden rounded-xl shadow-soft"
+              >
+                <img src={aboutCraft} alt="Inspecting fresh print" loading="lazy" className="aspect-[4/3] h-full w-full object-cover" />
+              </motion.div>
+              <div className="col-span-3 grid place-items-center rounded-xl bg-ink p-5 text-ivory">
+                <div>
+                  <div className="font-marker text-2xl" style={{ color: "var(--ochre)" }}>est.</div>
+                  <div className="font-display text-4xl font-semibold leading-none">Nagpur</div>
+                  <div className="mt-2 font-mono text-[10px] uppercase tracking-wider opacity-70">since you needed prints</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="lg:col-span-7">
+            <div className="grid gap-4 sm:grid-cols-2">
+              {items.map((it, i) => (
+                <motion.div key={it.t}
+                  initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+                  transition={{ delay: i * 0.08 }}
+                  className="hairline-strong group relative overflow-hidden rounded-2xl bg-paper p-6 shadow-soft transition hover:shadow-edge"
+                >
+                  <div className="grid h-12 w-12 place-items-center rounded-xl" style={{ background: "color-mix(in oklab, var(--brick) 12%, var(--paper))" }}>
+                    <it.icon className="h-5 w-5" style={{ color: "var(--brick)" }} />
+                  </div>
+                  <div className="mt-5 font-display text-xl font-medium">{it.t}</div>
+                  <div className="mt-2 text-sm leading-relaxed text-muted-foreground">{it.d}</div>
+                  <div aria-hidden className="pointer-events-none absolute -bottom-16 -right-16 h-40 w-40 rounded-full opacity-0 transition group-hover:opacity-100" style={{ background: "radial-gradient(circle, var(--ochre), transparent 70%)" }} />
+                </motion.div>
+              ))}
+            </div>
+
+            <div className="mt-6 hairline-strong grid grid-cols-3 divide-x divide-border overflow-hidden rounded-2xl bg-ink text-ivory">
+              {[
+                { k: "20+", v: "Years on the floor" },
+                { k: "1000+", v: "B2B accounts" },
+                { k: "18", v: "Output formats" },
+              ].map((s) => (
+                <div key={s.v} className="p-6">
+                  <div className="font-display text-3xl font-semibold tabular">{s.k}</div>
+                  <div className="mt-1 font-mono text-[10px] uppercase tracking-wider opacity-70">{s.v}</div>
+                </div>
+              ))}
+            </div>
+
+            {/* timeline */}
+            <div className="mt-6 hairline-strong rounded-2xl bg-paper p-6 shadow-soft">
+              <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">The floor, in four steps</div>
+              <div className="mt-5 grid gap-3 sm:grid-cols-4">
+                {[
+                  { n: "01", t: "Brief", d: "Files, sizes, media." },
+                  { n: "02", t: "Proof", d: "Colour + spec sign-off." },
+                  { n: "03", t: "Produce", d: "Line assigned to job." },
+                  { n: "04", t: "Deliver", d: "Pickup or dispatch." },
+                ].map((s) => (
+                  <div key={s.n} className="rounded-xl p-4" style={{ background: "color-mix(in oklab, var(--ochre) 10%, var(--paper))" }}>
+                    <div className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground">{s.n}</div>
+                    <div className="mt-1 font-display text-lg font-medium">{s.t}</div>
+                    <div className="mt-0.5 text-xs text-muted-foreground">{s.d}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ============================================================
+   SERVICES — image-forward editorial cards
    ============================================================ */
 const SERVICES = [
   { img: svcWide, icon: Printer, title: "Super Jumbo Xerox", desc: "Laser-grade B/W output on paper, tracing, cloth and engineering matte film up to A0+.", tag: "Reprographics" },
@@ -182,7 +348,7 @@ function Services() {
   return (
     <section id="services" className="py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
-        <SectionHeader kicker="01 / Services" title="Production-grade output, daily." sub="Six core lines that keep architecture studios, contractors and corporate offices unblocked." />
+        <SectionHeader kicker="02 / Services" title="Production-grade output, daily." sub="Six core lines that keep architecture studios, contractors and corporate offices unblocked." />
 
         <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {SERVICES.map((s, i) => (
@@ -215,88 +381,94 @@ function Services() {
 }
 
 /* ============================================================
-   CAPABILITY WHEEL — circular representation of every work
+   FLOWER WHEEL — petal-style (reference: previous website)
+   redesigned in editorial palette
    ============================================================ */
-const MATRIX = [
-  "Custom Wallpaper", "Envelopes", "Canvas", "Banners", "Satin Flags",
-  "UV & Foiling", "Die-Cut Stickers", "Fine-Art Prints", "Foamsheet",
-  "Vinyl", "Signage Systems", "Standees", "Reflective Vinyl", "Posters",
-  "Flags", "Frosted Films", "Rollup", "One-Way Vision",
+const PETALS: Array<{ label: string; color: string; text: string }> = [
+  { label: "Foamsheet",    color: "var(--sage)",  text: "var(--ivory)" },
+  { label: "Vinyl",        color: "var(--brick)", text: "var(--ivory)" },
+  { label: "Signages",     color: "var(--ochre)", text: "var(--ink)" },
+  { label: "Standee",      color: "var(--teal)",  text: "var(--ivory)" },
+  { label: "Signages 2",   color: "var(--ink)",   text: "var(--ivory)" },
+  { label: "Poster",       color: "var(--ivory)", text: "var(--ink)" },
+  { label: "Flags",        color: "var(--brick)", text: "var(--ivory)" },
+  { label: "Wallpaper",    color: "#8a4a2a",      text: "var(--ivory)" },
+  { label: "Envelopes",    color: "var(--ochre)", text: "var(--ink)" },
+  { label: "Canvas",       color: "var(--brick)", text: "var(--ivory)" },
+  { label: "Banner",       color: "var(--teal)",  text: "var(--ivory)" },
+  { label: "Satin Flags",  color: "var(--sage)",  text: "var(--ivory)" },
+  { label: "UV & Foiling", color: "#6e4b9e",      text: "var(--ivory)" },
+  { label: "Stickers",     color: "var(--ink)",   text: "var(--ivory)" },
+  { label: "Paintings",    color: "var(--brick)", text: "var(--ivory)" },
 ];
 
 function Wheel() {
-  const R = 220;
   return (
-    <section className="relative overflow-hidden border-y bg-ink py-24 text-ivory sm:py-32">
-      <div aria-hidden className="pointer-events-none absolute inset-0 dot-bg opacity-20" />
+    <section id="specialty" className="relative overflow-hidden border-y py-24 sm:py-32" style={{ background: "color-mix(in oklab, var(--ochre) 22%, var(--ivory))" }}>
+      <div aria-hidden className="pointer-events-none absolute inset-0 grid-bg opacity-40" />
       <div className="relative mx-auto grid max-w-7xl items-center gap-16 px-4 sm:px-6 lg:grid-cols-12">
         <div className="lg:col-span-5">
-          <div className="font-marker text-2xl" style={{ color: "var(--ochre)" }}>(yes, all of it)</div>
+          <div className="font-marker text-3xl" style={{ color: "var(--brick)" }}>spin me!</div>
           <h2 className="mt-2 font-display text-5xl font-medium leading-[0.95] sm:text-6xl">
-            One vendor.<br />
-            <span className="italic" style={{ color: "var(--ochre)" }}>Eighteen</span> output formats.
+            We specialize in <em className="italic" style={{ color: "var(--brick)" }}>literally</em> all of this.
           </h2>
-          <p className="mt-6 max-w-md leading-relaxed text-ivory/70">
-            Most clients consolidate three to five print suppliers into us. Single point of
-            contact, one PO, one invoice — across reprographics, large format, signage, and interiors.
+          <p className="mt-6 max-w-md text-lg leading-relaxed text-muted-foreground">
+            Fifteen different things on one little wheel. Pick one. Pick five. Pick all of them.
+            We're game — one PO, one invoice, one point of contact.
           </p>
-          <a href="#contact" className="mt-8 inline-flex items-center gap-2 rounded-full px-5 py-3 text-sm font-medium text-ink transition hover:opacity-90" style={{ background: "var(--ochre)" }}>
-            Consolidate your print stack <ArrowRight className="h-4 w-4" />
+          <a href="https://wa.me/917276141392" target="_blank" rel="noreferrer" className="mt-8 inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3.5 text-sm font-medium text-ivory transition hover:opacity-90">
+            <MessageCircle className="h-4 w-4" /> Send your file on WhatsApp
           </a>
         </div>
 
         <div className="lg:col-span-7">
-          <div className="relative mx-auto aspect-square w-full max-w-[520px]">
-            {/* rotating rings */}
+          <div className="relative mx-auto aspect-square w-full max-w-[560px]">
             <motion.div
               animate={{ rotate: 360 }} transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
               className="absolute inset-0"
             >
-              <svg viewBox="-260 -260 520 520" className="h-full w-full">
-                <circle cx="0" cy="0" r={R} fill="none" stroke="var(--ivory)" strokeOpacity="0.15" strokeDasharray="2 6" />
-                <circle cx="0" cy="0" r={R - 50} fill="none" stroke="var(--ivory)" strokeOpacity="0.1" />
+              <svg viewBox="-260 -260 520 520" className="h-full w-full drop-shadow-[0_20px_40px_rgba(0,0,0,0.15)]">
+                <defs>
+                  {/* teardrop / petal shape */}
+                  <g id="petal">
+                    <path
+                      d="M 0 -220 C 28 -220 46 -180 46 -130 C 46 -95 30 -70 0 -60 C -30 -70 -46 -95 -46 -130 C -46 -180 -28 -220 0 -220 Z"
+                    />
+                  </g>
+                </defs>
+                {PETALS.map((p, i) => {
+                  const angle = (i / PETALS.length) * 360;
+                  return (
+                    <g key={p.label} transform={`rotate(${angle})`}>
+                      <use href="#petal" fill={p.color} stroke="var(--ink)" strokeWidth="3" />
+                      <text
+                        x="0" y="-140"
+                        textAnchor="middle"
+                        fontSize="13"
+                        fontFamily="Fraunces"
+                        fontWeight="700"
+                        letterSpacing="0.05em"
+                        fill={p.text}
+                        style={{ textTransform: "uppercase" }}
+                      >
+                        {p.label}
+                      </text>
+                    </g>
+                  );
+                })}
+                {/* center hub */}
+                <circle cx="0" cy="0" r="52" fill="var(--ivory)" stroke="var(--ink)" strokeWidth="3" />
+                <text x="0" y="6" textAnchor="middle" fontFamily="Fraunces" fontWeight="700" fontSize="20" fill="var(--ink)">TCC</text>
               </svg>
             </motion.div>
-
-            <motion.div
-              animate={{ rotate: 360 }} transition={{ duration: 90, repeat: Infinity, ease: "linear" }}
-              className="absolute inset-0"
-            >
-              {MATRIX.map((label, i) => {
-                const angle = (i / MATRIX.length) * 2 * Math.PI - Math.PI / 2;
-                const x = Math.cos(angle) * R;
-                const y = Math.sin(angle) * R;
-                return (
-                  <motion.div
-                    key={label}
-                    animate={{ rotate: -360 }} transition={{ duration: 90, repeat: Infinity, ease: "linear" }}
-                    className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
-                    style={{ transform: `translate(calc(-50% + ${x}px), calc(-50% + ${y}px))` }}
-                  >
-                    <div className="hairline-strong whitespace-nowrap rounded-full bg-ivory/5 px-3 py-1.5 text-[11px] font-medium backdrop-blur transition hover:bg-ochre hover:text-ink" style={{ borderColor: "rgba(255,255,255,0.2)" }}>
-                      {label}
-                    </div>
-                  </motion.div>
-                );
-              })}
-            </motion.div>
-
-            {/* center hub */}
-            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-              <div className="hairline-strong grid h-40 w-40 place-items-center rounded-full bg-ivory/5 text-center backdrop-blur" style={{ borderColor: "rgba(255,255,255,0.3)" }}>
-                <div>
-                  <div className="font-marker text-lg" style={{ color: "var(--ochre)" }}>we print</div>
-                  <div className="font-display text-3xl font-semibold leading-tight">Every-<br />thing</div>
-                </div>
-              </div>
-            </div>
 
             {/* pulses */}
             {[0, 1, 2].map((i) => (
               <motion.div
                 key={i}
-                className="absolute left-1/2 top-1/2 h-40 w-40 -translate-x-1/2 -translate-y-1/2 rounded-full border border-ochre/40"
-                animate={{ scale: [1, 2.2], opacity: [0.5, 0] }}
+                className="absolute left-1/2 top-1/2 h-24 w-24 -translate-x-1/2 -translate-y-1/2 rounded-full border-2"
+                style={{ borderColor: "var(--brick)" }}
+                animate={{ scale: [1, 2.4], opacity: [0.5, 0] }}
                 transition={{ duration: 3, repeat: Infinity, delay: i * 1 }}
               />
             ))}
@@ -308,102 +480,217 @@ function Wheel() {
 }
 
 /* ============================================================
-   INDUSTRIES — with visual
+   INDUSTRIES — interactive tabs with images per industry
    ============================================================ */
-const INDUSTRIES = [
-  { icon: Building2, name: "Architecture & AEC", desc: "Plotted GFC sets, tender drawings, presentation boards." },
-  { icon: Factory, name: "Manufacturing", desc: "Safety signage, floor markings, MSDS posters, P&IDs." },
-  { icon: Hospital, name: "Hospitals", desc: "Wayfinding systems, patient education prints, ID consumables." },
-  { icon: GraduationCap, name: "Education", desc: "Thesis production, lab posters, campus signage." },
-  { icon: ShoppingBag, name: "Retail & F&B", desc: "Storefront vinyls, menu boards, seasonal POS rollouts." },
-  { icon: Hammer, name: "Real Estate & Interiors", desc: "Site hoardings, sample-flat graphics, wallpapers, canvas." },
+type Industry = {
+  key: string;
+  icon: typeof Building2;
+  name: string;
+  headline: string;
+  desc: string;
+  img: string;
+  work: { icon: typeof Ruler; label: string }[];
+};
+
+const INDUSTRIES: Industry[] = [
+  {
+    key: "arch",
+    icon: Building2,
+    name: "Architecture & AEC",
+    headline: "Drawings, sets, tenders.",
+    desc: "Plotted GFC sets, tender drawings, maps and presentation boards. Straight from your CAD, coloured or B/W, on paper, tracing or cloth.",
+    img: indArch,
+    work: [
+      { icon: MapIcon, label: "Site maps" },
+      { icon: Ruler, label: "Plotting A0" },
+      { icon: Compass, label: "GFC sets" },
+      { icon: BookOpen, label: "Tender books" },
+    ],
+  },
+  {
+    key: "mfg",
+    icon: Factory,
+    name: "Manufacturing",
+    headline: "Safety-critical signage.",
+    desc: "Floor markings, MSDS posters, PPE reminders, P&IDs and hazard signage that survives shop-floor conditions.",
+    img: indMfg,
+    work: [
+      { icon: AlertTriangle, label: "Hazard signs" },
+      { icon: HardHat, label: "PPE reminders" },
+      { icon: Ruler, label: "P&ID prints" },
+      { icon: Tag, label: "Floor markings" },
+    ],
+  },
+  {
+    key: "hosp",
+    icon: Hospital,
+    name: "Hospitals",
+    headline: "Calm, clear wayfinding.",
+    desc: "Directional systems, patient education prints, ID consumables and department signage — with cleanable finishes.",
+    img: indHosp,
+    work: [
+      { icon: Compass, label: "Wayfinding" },
+      { icon: BookOpen, label: "Patient prints" },
+      { icon: Tag, label: "Department signs" },
+      { icon: Layers, label: "Cleanable finish" },
+    ],
+  },
+  {
+    key: "edu",
+    icon: GraduationCap,
+    name: "Education",
+    headline: "Thesis to campus.",
+    desc: "Thesis production with hard-binding, lab posters, event standees and campus signage. Repeatable across semesters.",
+    img: indEdu,
+    work: [
+      { icon: BookOpen, label: "Thesis binding" },
+      { icon: Printer, label: "Lab posters" },
+      { icon: Tag, label: "Event standees" },
+      { icon: Compass, label: "Campus signage" },
+    ],
+  },
+  {
+    key: "retail",
+    icon: ShoppingBag,
+    name: "Retail & F&B",
+    headline: "Storefront to counter.",
+    desc: "Window vinyls, menu boards, seasonal POS rollouts and shelf-strip campaigns — rolled out across outlets in a single PO.",
+    img: indRetail,
+    work: [
+      { icon: Palette, label: "Window vinyl" },
+      { icon: Tag, label: "Menu boards" },
+      { icon: Printer, label: "POS rollouts" },
+      { icon: Maximize2, label: "Shelf strips" },
+    ],
+  },
+  {
+    key: "re",
+    icon: Hammer,
+    name: "Real Estate & Interiors",
+    headline: "Hoardings & sample-flats.",
+    desc: "Site hoardings, sample-flat graphics, custom wallpapers, gallery canvas — from CGI hand-off to on-site install.",
+    img: indRealEstate,
+    work: [
+      { icon: Maximize2, label: "Site hoardings" },
+      { icon: Layers, label: "Wallpapers" },
+      { icon: Palette, label: "Canvas prints" },
+      { icon: Tag, label: "Sample-flat graphics" },
+    ],
+  },
 ];
 
 function Industries() {
+  const [active, setActive] = useState<string>(INDUSTRIES[0].key);
+  const current = INDUSTRIES.find((i) => i.key === active) ?? INDUSTRIES[0];
+
   return (
     <section id="industries" className="py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
-        <SectionHeader kicker="02 / Industries" title="Built for procurement teams." sub="Repeatable specifications, predictable lead times, and a paper trail that survives an audit." />
+        <SectionHeader kicker="03 / Industries" title="Built for procurement teams." sub="Repeatable specifications, predictable lead times, and a paper trail that survives an audit. Pick your industry — see what we ship." />
 
-        <div className="mt-14 grid gap-8 lg:grid-cols-12">
-          <div className="lg:col-span-5">
-            <div className="hairline-strong shadow-edge sticky top-24 overflow-hidden rounded-2xl">
-              <img src={indProc} alt="Procurement team reviewing printed drawings" loading="lazy" className="h-full w-full object-cover" />
-            </div>
-          </div>
-          <div className="lg:col-span-7">
-            <div className="grid gap-4 sm:grid-cols-2">
-              {INDUSTRIES.map((it, i) => (
-                <motion.div
-                  key={it.name}
-                  initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: (i % 3) * 0.06 }}
-                  className="hairline group rounded-xl bg-paper p-5 transition hover:shadow-edge"
-                >
-                  <div className="flex items-center gap-3">
-                    <div className="grid h-9 w-9 place-items-center rounded-md" style={{ background: "color-mix(in oklab, var(--teal) 15%, var(--paper))" }}>
-                      <it.icon className="h-4 w-4" />
-                    </div>
-                    <div className="font-display text-lg font-medium">{it.name}</div>
-                  </div>
-                  <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{it.desc}</p>
-                </motion.div>
-              ))}
-            </div>
-          </div>
+        {/* tabs */}
+        <div className="mt-14 flex flex-wrap gap-2">
+          {INDUSTRIES.map((it) => {
+            const isActive = it.key === active;
+            return (
+              <button
+                key={it.key}
+                onClick={() => setActive(it.key)}
+                className={`hairline inline-flex items-center gap-2 rounded-full px-4 py-2.5 text-sm font-medium transition ${
+                  isActive ? "bg-ink text-ivory" : "bg-paper hover:bg-ink/5"
+                }`}
+              >
+                <it.icon className="h-4 w-4" />
+                {it.name}
+              </button>
+            );
+          })}
         </div>
+
+        {/* active panel */}
+        <motion.div
+          key={current.key}
+          initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }}
+          className="mt-10 grid gap-8 lg:grid-cols-12"
+        >
+          <div className="lg:col-span-7">
+            <div className="hairline-strong shadow-edge relative overflow-hidden rounded-2xl">
+              <img src={current.img} alt={current.name} loading="lazy" className="aspect-[16/10] h-full w-full object-cover" />
+              <div className="absolute left-4 top-4 rounded-md bg-ink/85 px-2.5 py-1 font-mono text-[10px] uppercase tracking-wider text-ivory">
+                {current.name}
+              </div>
+              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink/90 via-ink/40 to-transparent p-6 text-ivory">
+                <div className="font-display text-3xl font-medium sm:text-4xl">{current.headline}</div>
+              </div>
+            </div>
+          </div>
+
+          <div className="lg:col-span-5">
+            <div className="hairline-strong h-full rounded-2xl bg-paper p-6 shadow-soft">
+              <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">What we ship for {current.name.toLowerCase()}</div>
+              <p className="mt-4 text-base leading-relaxed text-muted-foreground">{current.desc}</p>
+
+              <div className="mt-6 grid grid-cols-2 gap-3">
+                {current.work.map((w, i) => (
+                  <motion.div
+                    key={w.label}
+                    initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.05 }}
+                    className="hairline flex items-center gap-3 rounded-xl bg-paper p-3"
+                  >
+                    <div className="grid h-9 w-9 place-items-center rounded-md" style={{ background: "color-mix(in oklab, var(--brick) 12%, var(--paper))" }}>
+                      <w.icon className="h-4 w-4" style={{ color: "var(--brick)" }} />
+                    </div>
+                    <div className="text-sm font-medium">{w.label}</div>
+                  </motion.div>
+                ))}
+              </div>
+
+              <a href="#contact" className="mt-6 inline-flex items-center gap-2 text-sm font-medium" style={{ color: "var(--brick)" }}>
+                Talk to us about {current.name.toLowerCase()} <ArrowRight className="h-3.5 w-3.5" />
+              </a>
+            </div>
+          </div>
+        </motion.div>
       </div>
     </section>
   );
 }
 
 /* ============================================================
-   LARGE FORMAT — Goes big. Goes outside.
+   LARGE FORMAT — 6 photos structured
    ============================================================ */
+const LF_ITEMS = [
+  { img: bigHoard,   tag: "Hoardings",   title: "Building hoardings & flex banners", desc: "Flex, star-flex, vinyl on foamsheet — installed or ready-to-hang.", cls: "lg:col-span-8 lg:row-span-2 aspect-[16/10]" },
+  { img: bigWall,    tag: "Interior",    title: "Custom wallpapers", desc: "Cafes, boutiques, sample-flats, boardrooms.", cls: "lg:col-span-4 aspect-[4/5]" },
+  { img: bigSignage, tag: "Facade",      title: "Illuminated signage", desc: "Facade-mounted and edge-lit systems.", cls: "lg:col-span-4 aspect-[4/3]" },
+  { img: bigCanvas,  tag: "Gallery",     title: "Gallery canvas & fine-art", desc: "Museum-grade canvas + framing.", cls: "lg:col-span-4 aspect-[4/3]" },
+  { img: bigStandee, tag: "Events",      title: "Rollup standees", desc: "Trade shows, launches, corporate events.", cls: "lg:col-span-4 aspect-[4/3]" },
+  { img: bigVinyl,   tag: "Vinyl",       title: "Print + cut vinyl", desc: "Precision-cut decals, reflective vinyl, stickers.", cls: "lg:col-span-6 aspect-[4/3]" },
+  { img: bigWrap,    tag: "Wrap",        title: "Full building wraps", desc: "City-scale campaigns, facade takeovers.", cls: "lg:col-span-6 aspect-[4/3]" },
+];
+
 function LargeFormat() {
   return (
     <section id="large-format" className="border-y bg-[color-mix(in_oklab,var(--ochre)_8%,var(--ivory))] py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
-        <SectionHeader kicker="03 / Large format" title="Goes big. Goes outside." sub="From the factory wall to the highway hoarding — and from the boardroom feature-wall to the boutique cafe." />
+        <SectionHeader kicker="04 / Large format" title="Goes big. Goes outside." sub="From the factory wall to the highway hoarding — and from the boardroom feature-wall to the boutique cafe. Seven ways we go large." />
 
-        <div className="mt-14 grid gap-6 lg:grid-cols-12">
-          <motion.figure
-            initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-            className="hairline-strong shadow-soft group overflow-hidden rounded-2xl bg-paper lg:col-span-7"
-          >
-            <div className="relative aspect-[4/3] overflow-hidden lg:aspect-[16/10]">
-              <img src={bigHoard} alt="Large printed hoarding installed on a building" loading="lazy" className="h-full w-full object-cover transition duration-700 group-hover:scale-105" />
-              <div className="absolute left-4 top-4 rounded-md bg-ink/85 px-2.5 py-1 font-mono text-[10px] uppercase tracking-wider text-ivory">Industrial</div>
-            </div>
-            <figcaption className="p-6">
-              <div className="font-display text-2xl font-medium">Building hoardings, safety signage, banners</div>
-              <p className="mt-2 text-sm text-muted-foreground">Flex, star-flex, vinyl on foamsheet, retro-reflective and glow-in-the-dark systems. Installed or supplied ready-to-hang.</p>
-              <div className="mt-4 flex flex-wrap gap-2">
-                {["Safety signage", "Flex banners", "Reflective vinyl", "Rollup standees", "Glow-in-dark"].map((t) => (
-                  <span key={t} className="hairline rounded-full bg-paper px-3 py-1 text-xs">{t}</span>
-                ))}
-              </div>
-            </figcaption>
-          </motion.figure>
-
-          <motion.figure
-            initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }}
-            className="hairline-strong shadow-soft group overflow-hidden rounded-2xl bg-paper lg:col-span-5"
-          >
-            <div className="relative aspect-[4/3] overflow-hidden lg:aspect-[4/5]">
-              <img src={bigWall} alt="Custom printed wallpaper in an interior" loading="lazy" className="h-full w-full object-cover transition duration-700 group-hover:scale-105" />
-              <div className="absolute left-4 top-4 rounded-md bg-ink/85 px-2.5 py-1 font-mono text-[10px] uppercase tracking-wider text-ivory">Interior</div>
-            </div>
-            <figcaption className="p-6">
-              <div className="font-display text-2xl font-medium">Wallpapers, canvas, frosted films</div>
-              <p className="mt-2 text-sm text-muted-foreground">Custom wallpapers, gallery canvas, frosted & one-way vision films — for cafes, boutiques, sample-flats and boardrooms.</p>
-              <div className="mt-4 flex flex-wrap gap-2">
-                {["Wallpaper", "Canvas", "Frosted film", "One-way vision", "Poster"].map((t) => (
-                  <span key={t} className="hairline rounded-full bg-paper px-3 py-1 text-xs">{t}</span>
-                ))}
-              </div>
-            </figcaption>
-          </motion.figure>
+        <div className="mt-14 grid gap-5 lg:grid-cols-12">
+          {LF_ITEMS.map((it, i) => (
+            <motion.figure
+              key={it.title}
+              initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-60px" }}
+              transition={{ duration: 0.5, delay: (i % 3) * 0.08 }}
+              className={`hairline-strong shadow-soft group relative overflow-hidden rounded-2xl bg-paper ${it.cls}`}
+            >
+              <img src={it.img} alt={it.title} loading="lazy" className="h-full w-full object-cover transition duration-700 group-hover:scale-105" />
+              <div className="absolute left-3 top-3 rounded-md bg-ink/85 px-2.5 py-1 font-mono text-[10px] uppercase tracking-wider text-ivory">{it.tag}</div>
+              <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink/90 via-ink/40 to-transparent p-5 text-ivory">
+                <div className="font-display text-xl font-medium sm:text-2xl">{it.title}</div>
+                <div className="mt-1 text-xs opacity-80">{it.desc}</div>
+              </figcaption>
+            </motion.figure>
+          ))}
         </div>
       </div>
     </section>
@@ -411,75 +698,7 @@ function LargeFormat() {
 }
 
 /* ============================================================
-   ABOUT US (was Specs / Why us) — visualized
-   ============================================================ */
-function About() {
-  const items = [
-    { icon: Zap, t: "UPS-backed floor", d: "Power cuts do not enter our SLA. Lines stay live, deadlines stay intact." },
-    { icon: Clock, t: "Same-day capacity", d: "Walk-in bulk runs cleared the same day for repeat accounts." },
-    { icon: Award, t: "Material specialists", d: "Tracing, garware film, vinyl, canvas, foamsheet, acrylic — paired to the right press." },
-    { icon: CheckCircle2, t: "GST-compliant billing", d: "Clean invoices, PO support, monthly statements for procurement." },
-  ];
-  return (
-    <section id="about" className="border-t bg-paper py-24 sm:py-32">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6">
-        <div className="grid gap-14 lg:grid-cols-12">
-          <div className="lg:col-span-5">
-            <div className="font-mono text-xs uppercase tracking-[0.2em] text-muted-foreground">04 / About us</div>
-            <h2 className="mt-4 font-display text-4xl font-medium leading-[1.02] tracking-tight sm:text-5xl md:text-6xl">
-              Two decades on the floor. <em className="italic" style={{ color: "var(--brick)" }}>One promise:</em> we deliver.
-            </h2>
-            <p className="mt-6 text-lg leading-relaxed text-muted-foreground">
-              True Copy Centre started as a neighbourhood print shop in Dhantoli and grew into
-              Central India's B2B production partner. What hasn't changed: the person picking
-              up the phone is the same person on the floor when your job runs.
-            </p>
-
-            <div className="mt-8 hairline-strong overflow-hidden rounded-2xl">
-              <img src={aboutCraft} alt="Craftsman inspecting a fresh print" loading="lazy" className="h-full w-full object-cover" />
-            </div>
-          </div>
-
-          <div className="lg:col-span-7">
-            <div className="grid gap-4 sm:grid-cols-2">
-              {items.map((it, i) => (
-                <motion.div key={it.t}
-                  initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-                  transition={{ delay: i * 0.08 }}
-                  className="hairline-strong group relative overflow-hidden rounded-2xl bg-paper p-6 shadow-soft transition hover:shadow-edge"
-                >
-                  <div className="grid h-12 w-12 place-items-center rounded-xl" style={{ background: "color-mix(in oklab, var(--brick) 12%, var(--paper))" }}>
-                    <it.icon className="h-5 w-5" style={{ color: "var(--brick)" }} />
-                  </div>
-                  <div className="mt-5 font-display text-xl font-medium">{it.t}</div>
-                  <div className="mt-2 text-sm leading-relaxed text-muted-foreground">{it.d}</div>
-                  <div aria-hidden className="pointer-events-none absolute -bottom-16 -right-16 h-40 w-40 rounded-full opacity-0 transition group-hover:opacity-100" style={{ background: "radial-gradient(circle, var(--ochre), transparent 70%)" }} />
-                </motion.div>
-              ))}
-            </div>
-
-            {/* mini stats strip */}
-            <div className="mt-6 hairline-strong grid grid-cols-3 divide-x divide-border overflow-hidden rounded-2xl bg-ink text-ivory">
-              {[
-                { k: "20+", v: "Years on the floor" },
-                { k: "1000+", v: "B2B accounts" },
-                { k: "18", v: "Output formats" },
-              ].map((s) => (
-                <div key={s.v} className="p-6">
-                  <div className="font-display text-3xl font-semibold tabular">{s.k}</div>
-                  <div className="mt-1 font-mono text-[10px] uppercase tracking-wider opacity-70">{s.v}</div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* ============================================================
-   CONTACT
+   CONTACT — single production number, no accounts row
    ============================================================ */
 function Contact() {
   return (
@@ -498,8 +717,7 @@ function Contact() {
             </p>
 
             <div className="mt-10 space-y-3">
-              <ContactRow icon={Phone} label="+91 98222 24644" href="tel:+919822224644" sub="Production manager · direct" />
-              <ContactRow icon={Phone} label="+91 73878 89990" href="tel:+917387889990" sub="Accounts & quotations" />
+              <ContactRow icon={Phone} label="+91 98222 24644" href="tel:+919822224644" sub="Production floor · direct" />
               <ContactRow icon={MessageCircle} label="WhatsApp · 72761 41392" href="https://wa.me/917276141392" sub="Send files, get acknowledgement" />
               <ContactRow icon={MailIcon} label="truecopycentre@gmail.com" href="mailto:truecopycentre@gmail.com" sub="Tenders, RFQs, RFPs" />
             </div>
@@ -637,34 +855,34 @@ function Footer() {
               <div className="font-display text-xl font-semibold">True Copy Centre Pvt. Ltd.</div>
             </div>
             <p className="mt-5 max-w-sm text-sm leading-relaxed text-muted-foreground">
-              Central India's B2B print production partner. Wide-format, signage, interiors, and reprographics — under one roof in Dhantoli, Nagpur.
+              Central India's B2B print production partner. Wide-format, industrial signage,
+              interior graphics, and reprographics — on deadline, on spec.
             </p>
-            <div className="mt-5 font-marker text-xl" style={{ color: "var(--brick)" }}>print anything, on deadline ✦</div>
           </div>
-
-          <div className="grid gap-8 sm:grid-cols-3 lg:col-span-7">
-            <FooterCol title="Services" links={["Wide-format CAD", "Signage systems", "Interior graphics", "Reprographics", "UV & foiling"]} />
-            <FooterCol title="Company" links={["Industries", "Large Format", "About Us", "Student Work", "Contact"]} />
-            <FooterCol title="Reach us" links={["+91 98222 24644", "WhatsApp: 72761 41392", "truecopycentre@gmail.com", "Dhantoli, Nagpur 440012"]} />
+          <div className="lg:col-span-7 grid grid-cols-2 gap-6 sm:grid-cols-3">
+            <FooterCol title="Explore" items={[["About", "#about"], ["Services", "#services"], ["Industries", "#industries"], ["Large Format", "#large-format"]]} />
+            <FooterCol title="Reach us" items={[["Call", "tel:+919822224644"], ["WhatsApp", "https://wa.me/917276141392"], ["Email", "mailto:truecopycentre@gmail.com"]]} />
+            <FooterCol title="Visit" items={[["Dhantoli, Nagpur", "#contact"], ["Mon–Sat · 9:30–21:00", "#contact"]]} />
           </div>
         </div>
-
-        <div className="mt-12 flex flex-col items-start justify-between gap-3 border-t pt-6 text-xs text-muted-foreground sm:flex-row sm:items-center">
-          <div>© {new Date().getFullYear()} True Copy Centre Pvt. Ltd. · GSTIN on request.</div>
-          <div className="font-mono uppercase tracking-[0.18em]">Made with ink, toner & love.</div>
+        <div className="mt-12 flex flex-wrap items-center justify-between gap-4 border-t pt-6 font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
+          <span>© {new Date().getFullYear()} True Copy Centre Pvt. Ltd.</span>
+          <span>Made on the floor · Nagpur</span>
         </div>
       </div>
     </footer>
   );
 }
 
-function FooterCol({ title, links }: { title: string; links: string[] }) {
+function FooterCol({ title, items }: { title: string; items: [string, string][] }) {
   return (
     <div>
       <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">{title}</div>
-      <ul className="mt-4 space-y-2.5 text-sm">
-        {links.map((l) => (
-          <li key={l}><a href="#" className="text-foreground/80 transition hover:text-foreground">{l}</a></li>
+      <ul className="mt-4 space-y-2">
+        {items.map(([label, href]) => (
+          <li key={label}>
+            <a href={href} className="text-sm font-medium hover:underline">{label}</a>
+          </li>
         ))}
       </ul>
     </div>
@@ -676,18 +894,18 @@ function FooterCol({ title, links }: { title: string; links: string[] }) {
    ============================================================ */
 function Index() {
   return (
-    <main className="overflow-x-clip">
+    <div className="min-h-screen bg-ivory text-foreground">
       <UtilityBar />
       <Nav />
       <Hero />
       <ClientStrip />
+      <About />
       <Services />
       <Wheel />
       <Industries />
       <LargeFormat />
-      <About />
       <Contact />
       <Footer />
-    </main>
+    </div>
   );
 }
