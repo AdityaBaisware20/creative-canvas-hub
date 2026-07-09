@@ -2,7 +2,8 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import { ArrowRight, GraduationCap, BookOpen, Palette, Ruler } from "lucide-react";
 import { Nav, UtilityBar } from "@/components/site-nav";
-import stu1 from "@/assets/stu-1.jpg";
+import stu1Asset from "@/assets/stu-architect.jpg.asset.json";
+const stu1 = stu1Asset.url;
 import stu2 from "@/assets/stu-2.jpg";
 import stu3 from "@/assets/stu-3.jpg";
 import stu4 from "@/assets/stu-4.jpg";
@@ -22,7 +23,7 @@ export const Route = createFileRoute("/student")({
 });
 
 const WORKS = [
-  { img: stu1, title: "B.Arch Thesis · VNIT", tag: "Hardbound · A3 · 240 pgs", note: "Landscape thesis, offset-quality inside, cloth-wrap hardcover with foil title." },
+  { img: stu1, title: "B.Arch Studio Sheets · VNIT", tag: "A1 Plot · 1:100 · Bond 90gsm", note: "Precision-scaled architectural drawings — crisp line-weights, true-to-scale dimensions, ready for jury table review." },
   { img: stu2, title: "Design Portfolio · NID", tag: "Loose-leaf · A3 · pantone match", note: "Curated portfolio pages with color-swatch consistency across 40 sheets." },
   { img: stu3, title: "Fashion Jury Board · LISAA", tag: "Foamcore mount · 30x40", note: "Editorial illustration board mounted on foam, matte laminated." },
   { img: stu4, title: "Urban Design Sheet · IPS", tag: "Wide-format · A0 ×6", note: "Six-sheet A0 plot set with 1:200 site layouts and section studies." },
