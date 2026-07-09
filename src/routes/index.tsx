@@ -880,6 +880,15 @@ function Footer() {
   );
 }
 
+function SocialIcon({ href, label, icon: Icon }: { href: string; label: string; icon: typeof Instagram }) {
+  return (
+    <a href={href} target="_blank" rel="noreferrer" aria-label={label}
+      className="hairline-strong group grid h-10 w-10 place-items-center rounded-full bg-paper transition hover:bg-ink hover:text-ivory">
+      <Icon className="h-4 w-4" />
+    </a>
+  );
+}
+
 function FooterCol({ title, items }: { title: string; items: [string, string][] }) {
   return (
     <div>
