@@ -3,7 +3,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef, useState } from "react";
 import {
   Printer, Scan, BookOpen, Layers, Maximize2,
-  MapPin, Phone, MessageCircle, Mail as MailIcon,
+  MapPin, Phone, MessageCircle, Mail as MailIcon, Instagram, Facebook,
   ArrowUpRight, ArrowRight, CheckCircle2, Factory, Building2, Hospital, GraduationCap, ShoppingBag, Hammer, Zap, Clock, Award, Palette,
   Ruler, Map as MapIcon, AlertTriangle, Compass, Tag, HardHat,
 } from "lucide-react";
@@ -865,7 +865,13 @@ function Footer() {
             <FooterCol title="Visit" items={[["Dhantoli, Nagpur", "#contact"], ["Mon–Sat · 9:30–21:00", "#contact"]]} />
           </div>
         </div>
-        <div className="mt-12 flex flex-wrap items-center justify-between gap-4 border-t pt-6 font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
+        <div className="mt-10 flex flex-wrap items-center gap-3 border-t pt-8">
+          <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground mr-2">Follow the floor</span>
+          <SocialIcon href="https://instagram.com/truecopycentre" label="Instagram" icon={Instagram} />
+          <SocialIcon href="https://facebook.com/truecopycentre" label="Facebook" icon={Facebook} />
+          <SocialIcon href="https://wa.me/917276141392" label="WhatsApp" icon={MessageCircle} />
+        </div>
+        <div className="mt-8 flex flex-wrap items-center justify-between gap-4 border-t pt-6 font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
           <span>© {new Date().getFullYear()} True Copy Centre Pvt. Ltd.</span>
           <span>Made on the floor · Nagpur</span>
         </div>
