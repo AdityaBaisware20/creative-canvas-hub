@@ -3,7 +3,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef, useState } from "react";
 import {
   Printer, Scan, BookOpen, Layers, Maximize2,
-  MapPin, Phone, MessageCircle, Mail as MailIcon, Instagram, Facebook,
+  MapPin, Phone, MessageCircle, Mail as MailIcon, Instagram, Facebook, Sparkles,
   ArrowUpRight, ArrowRight, CheckCircle2, Factory, Building2, Hospital, GraduationCap, ShoppingBag, Hammer, Zap, Clock, Award, Palette,
   Ruler, Map as MapIcon, AlertTriangle, Compass, Tag, HardHat,
 } from "lucide-react";
@@ -847,6 +847,7 @@ function Footer() {
     <footer className="border-t bg-ivory">
       <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6">
         <div className="grid gap-10 lg:grid-cols-12">
+          {/* Brand + social */}
           <div className="lg:col-span-5">
             <div className="flex items-center gap-3">
               <div className="hairline-strong grid h-10 w-10 place-items-center rounded-md bg-ink">
@@ -855,25 +856,62 @@ function Footer() {
               <div className="font-display text-xl font-semibold">True Copy Centre Pvt. Ltd.</div>
             </div>
             <p className="mt-5 max-w-sm text-sm leading-relaxed text-muted-foreground">
-              Central India's B2B print production partner. Wide-format, industrial signage,
-              interior graphics, and reprographics — on deadline, on spec.
+              Central India's B2B print production partner. Wide-format, signage, interiors, and
+              reprographics — under one roof in Dhantoli, Nagpur.
             </p>
+            <div className="mt-4 inline-flex items-center gap-2 font-marker text-lg" style={{ color: "var(--brick)" }}>
+              print anything, on deadline
+              <Sparkles className="h-4 w-4" style={{ color: "var(--ochre)" }} />
+            </div>
+
+            <div className="mt-6">
+              <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">Follow us</div>
+              <div className="mt-3 flex items-center gap-3">
+                <SocialIcon href="https://instagram.com/truecopycentre" label="Instagram" icon={Instagram} />
+                <SocialIcon href="https://facebook.com/truecopycentre" label="Facebook" icon={Facebook} />
+                <SocialIcon href="https://wa.me/917276141392" label="WhatsApp" icon={MessageCircle} />
+              </div>
+            </div>
           </div>
-          <div className="lg:col-span-7 grid grid-cols-2 gap-6 sm:grid-cols-3">
-            <FooterCol title="Explore" items={[["About", "#about"], ["Services", "#services"], ["Industries", "#industries"], ["Large Format", "#large-format"]]} />
-            <FooterCol title="Reach us" items={[["Call", "tel:+919822224644"], ["WhatsApp", "https://wa.me/917276141392"], ["Email", "mailto:truecopycentre@gmail.com"]]} />
-            <FooterCol title="Visit" items={[["Dhantoli, Nagpur", "#contact"], ["Mon–Sat · 9:30–21:00", "#contact"]]} />
+
+          {/* Link columns */}
+          <div className="lg:col-span-7 grid grid-cols-2 gap-8 sm:grid-cols-3">
+            <FooterCol
+              title="Services"
+              items={[
+                ["Wide-format CAD", "#services"],
+                ["Signage systems", "#services"],
+                ["Interior graphics", "#services"],
+                ["Reprographics", "#services"],
+                ["UV & foiling", "#services"],
+              ]}
+            />
+            <FooterCol
+              title="Company"
+              items={[
+                ["Industries", "#industries"],
+                ["Large Format", "#large-format"],
+                ["About Us", "#about"],
+                ["Student Work", "/student"],
+                ["Contact", "#contact"],
+              ]}
+            />
+            <FooterCol
+              title="Reach us"
+              items={[
+                ["+91 98222 24644", "tel:+919822224644"],
+                ["WhatsApp: 72761 41392", "https://wa.me/917276141392"],
+                ["truecopycentre@gmail.com", "mailto:truecopycentre@gmail.com"],
+                ["Dhantoli, Nagpur 440012", "#contact"],
+              ]}
+            />
           </div>
         </div>
-        <div className="mt-10 flex flex-wrap items-center gap-3 border-t pt-8">
-          <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground mr-2">Follow the floor</span>
-          <SocialIcon href="https://instagram.com/truecopycentre" label="Instagram" icon={Instagram} />
-          <SocialIcon href="https://facebook.com/truecopycentre" label="Facebook" icon={Facebook} />
-          <SocialIcon href="https://wa.me/917276141392" label="WhatsApp" icon={MessageCircle} />
-        </div>
-        <div className="mt-8 flex flex-wrap items-center justify-between gap-4 border-t pt-6 font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
-          <span>© {new Date().getFullYear()} True Copy Centre Pvt. Ltd.</span>
-          <span>Made on the floor · Nagpur</span>
+
+        {/* Bottom bar */}
+        <div className="mt-12 flex flex-wrap items-center justify-between gap-4 border-t pt-6 font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
+          <span>© {new Date().getFullYear()} True Copy Centre Pvt. Ltd. · GSTIN on request.</span>
+          <span className="tracking-[0.25em]">Made with ink, toner & love.</span>
         </div>
       </div>
     </footer>
@@ -882,9 +920,14 @@ function Footer() {
 
 function SocialIcon({ href, label, icon: Icon }: { href: string; label: string; icon: typeof Instagram }) {
   return (
-    <a href={href} target="_blank" rel="noreferrer" aria-label={label}
-      className="hairline-strong group grid h-10 w-10 place-items-center rounded-full bg-paper transition hover:bg-ink hover:text-ivory">
-      <Icon className="h-4 w-4" />
+    <a
+      href={href}
+      target="_blank"
+      rel="noreferrer"
+      aria-label={label}
+      className="hairline-strong group grid h-10 w-10 place-items-center rounded-full bg-paper transition hover:bg-ink hover:text-ivory"
+    >
+      <Icon className="h-4 w-4 transition-transform group-hover:scale-110" />
     </a>
   );
 }
@@ -893,10 +936,16 @@ function FooterCol({ title, items }: { title: string; items: [string, string][] 
   return (
     <div>
       <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">{title}</div>
-      <ul className="mt-4 space-y-2">
+      <ul className="mt-4 space-y-2.5">
         {items.map(([label, href]) => (
           <li key={label}>
-            <a href={href} className="text-sm font-medium hover:underline">{label}</a>
+            {href ? (
+              <a href={href} className="text-sm font-medium text-foreground/80 transition hover:text-foreground hover:underline">
+                {label}
+              </a>
+            ) : (
+              <span className="text-sm font-medium text-foreground/80">{label}</span>
+            )}
           </li>
         ))}
       </ul>
