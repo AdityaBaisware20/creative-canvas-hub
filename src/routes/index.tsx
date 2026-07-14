@@ -3,7 +3,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef, useState } from "react";
 import {
   Printer, Scan, BookOpen, Layers, Maximize2,
-  MapPin, Phone, MessageCircle, Mail as MailIcon, Instagram, Facebook,
+  MapPin, Phone, MessageCircle, Mail as MailIcon, Instagram, Facebook, Sparkles,
   ArrowUpRight, ArrowRight, CheckCircle2, Factory, Building2, Hospital, GraduationCap, ShoppingBag, Hammer, Zap, Clock, Award, Palette,
   Ruler, Map as MapIcon, AlertTriangle, Compass, Tag, HardHat,
 } from "lucide-react";
