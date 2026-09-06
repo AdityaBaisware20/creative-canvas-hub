@@ -127,6 +127,12 @@ function Hero() {
 
   return (
     <section id="top" ref={ref} className="paper-bg relative overflow-hidden">
+      {/* soft photographic backdrop — centered on mobile, top-anchored on desktop, never crops the subject */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 bg-contain bg-center bg-no-repeat opacity-[0.10] sm:bg-cover md:bg-top"
+        style={{ backgroundImage: "url('/assets/images/everyday-stuff.jpg')" }}
+      />
       {/* ===== Background layer: giant CMYK ink blobs ===== */}
       <motion.div style={{ y: yBg }} aria-hidden className="pointer-events-none absolute inset-0">
         <motion.div
