@@ -40,6 +40,37 @@ function Sticky({ children, color, rotate = -2, className = "" }: { children: Re
   );
 }
 
+/* Tactile clay/papercraft showcase image with neo-brutalist frame */
+function ShowcaseImage({
+  src, alt, caption, tilt = -1.5, color = "pop-yellow",
+}: { src: string; alt: string; caption: string; tilt?: number; color?: string }) {
+  return (
+    <motion.figure
+      initial={{ opacity: 0, y: 40, rotate: tilt * 2 }}
+      whileInView={{ opacity: 1, y: 0, rotate: tilt }}
+      viewport={{ once: true, margin: "-80px" }}
+      transition={{ type: "spring", stiffness: 140, damping: 16 }}
+      whileHover={{ rotate: 0, y: -6 }}
+      className="border-ink-thick shadow-cartoon-lg relative mt-12 overflow-hidden rounded-3xl bg-white"
+    >
+      <img
+        src={src}
+        alt={alt}
+        loading="lazy"
+        width={1024}
+        height={768}
+        className="block h-56 w-full object-cover object-center sm:h-72 md:h-96"
+      />
+      <figcaption
+        className="border-t-4 border-ink px-5 py-3 font-display text-lg font-bold sm:text-xl"
+        style={{ background: `var(--color-${color})` }}
+      >
+        {caption}
+      </figcaption>
+    </motion.figure>
+  );
+}
+
 /* ---------- sections ---------- */
 
 function TopBar() {
@@ -96,6 +127,12 @@ function Hero() {
 
   return (
     <section id="top" ref={ref} className="paper-bg relative overflow-hidden">
+      {/* soft photographic backdrop — centered on mobile, top-anchored on desktop, never crops the subject */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 bg-contain bg-center bg-no-repeat opacity-[0.10] sm:bg-cover md:bg-top"
+        style={{ backgroundImage: "url('/assets/images/everyday-stuff.jpg')" }}
+      />
       {/* ===== Background layer: giant CMYK ink blobs ===== */}
       <motion.div style={{ y: yBg }} aria-hidden className="pointer-events-none absolute inset-0">
         <motion.div
@@ -355,6 +392,13 @@ function Services() {
     <section id="services" className="relative py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <SectionHeader kicker="Our daily superpowers" title="The everyday stuff" sub="Walk in with a file. Walk out with magic." color="pop-red" />
+        <ShowcaseImage
+          src="/assets/images/everyday-stuff.jpg"
+          alt="Clay-style stacks of colourful paper, spiral notebooks and a copier"
+          caption="Copies, notebooks, bindings — the daily bread & butter."
+          color="pop-yellow"
+          tilt={-1.5}
+        />
         <div className="mt-14 grid gap-7 sm:grid-cols-2 lg:grid-cols-3">
           {CORE_SERVICES.map((s, i) => (
             <motion.div
@@ -475,12 +519,26 @@ function BigStuff() {
     <section id="big" className="py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <SectionHeader kicker="Goes big. Goes loud." title="Industrial applications" sub="From the warehouse floor to the highway billboard." color="pop-blue" />
+        <ShowcaseImage
+          src="/assets/images/industrial.jpg"
+          alt="Clay-style miniature safety signs, foam boards and a rollup standee"
+          caption="Safety signage, foam boards, standees — built for the floor."
+          color="pop-blue"
+          tilt={1.5}
+        />
         <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {INDUSTRIAL.map((s, i) => <PillCard key={s.title} {...s} i={i} />)}
         </div>
 
         <div className="mt-24">
           <SectionHeader id="interior" kicker="Make any room sing." title="Interior applications" sub="Your walls deserve better." color="pop-purple" />
+          <ShowcaseImage
+            src="/assets/images/interior.jpg"
+            alt="Clay-style wallpaper rolls, canvas on an easel and a framed poster"
+            caption="Wallpapers, canvas, posters — walls with a personality."
+            color="pop-purple"
+            tilt={-1.5}
+          />
           <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {INTERIOR.map((s, i) => <PillCard key={s.title} {...s} i={i} />)}
           </div>
@@ -522,6 +580,13 @@ function Specials() {
     <section className="paper-bg py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <SectionHeader kicker="House specials" title="The fun extras" sub="The stuff people drive across town for." color="pop-pink" />
+        <ShowcaseImage
+          src="/assets/images/fun-extras.jpg"
+          alt="Clay-style glossy die-cut stickers and gold foil embossed envelopes"
+          caption="Die-cut stickers, foiling, fancy envelopes — the show-offs."
+          color="pop-pink"
+          tilt={1.5}
+        />
         <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {items.map((it, i) => (
             <motion.div
