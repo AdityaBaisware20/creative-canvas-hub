@@ -534,23 +534,16 @@ function PillCard({ img, title, color, i }: { img: string; title: string; color:
 /* ---------- specials strip ---------- */
 function Specials() {
   const items = [
-    { title: "Stickers", sub: "Any shape. Any size.", emoji: "🏷️", color: "pop-red" },
-    { title: "Customized Envelopes", sub: "Money & wedding.", emoji: "💌", color: "pop-green" },
-    { title: "UV & Foiling", sub: "Gold, silver, copper, red, blue, white.", emoji: "✨", color: "pop-yellow" },
-    { title: "CAD Printouts on Laser", sub: "A4 → A0+, up to 44\" any length.", emoji: "📐", color: "pop-blue" },
-    { title: "Ammonia / Blue Prints", sub: "Tracing & garware films.", emoji: "🧪", color: "pop-purple" },
+    { title: "Stickers", sub: "Any shape. Any size.", img: "/assets/images/icons/stickers.png", color: "pop-red" },
+    { title: "Customized Envelopes", sub: "Money & wedding.", img: "/assets/images/icons/envelopes.png", color: "pop-green" },
+    { title: "UV & Foiling", sub: "Gold, silver, copper, red, blue, white.", img: "/assets/images/icons/uv-foiling.png", color: "pop-yellow" },
+    { title: "CAD Printouts on Laser", sub: "A4 → A0+, up to 44\" any length.", img: "/assets/images/icons/cad-printouts.png", color: "pop-blue" },
+    { title: "Ammonia / Blue Prints", sub: "Tracing & garware films.", img: "/assets/images/icons/blueprints.png", color: "pop-purple" },
   ];
   return (
     <section className="paper-bg py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <SectionHeader kicker="House specials" title="The fun extras" sub="The stuff people drive across town for." color="pop-pink" />
-        <ShowcaseImage
-          src="/assets/images/fun-extras.jpg"
-          alt="Clay-style glossy die-cut stickers and gold foil embossed envelopes"
-          caption="Die-cut stickers, foiling, fancy envelopes — the show-offs."
-          color="pop-pink"
-          tilt={1.5}
-        />
         <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {items.map((it, i) => (
             <motion.div
@@ -562,11 +555,15 @@ function Specials() {
               whileHover={{ y: -8, rotate: -1 }}
               className="border-ink-thick shadow-cartoon-lg relative overflow-hidden rounded-3xl bg-white p-7"
             >
-              <div className="absolute right-3 top-3 text-5xl">{it.emoji}</div>
-              <div className="border-ink mb-5 inline-block rounded-full px-3 py-1 text-xs font-black uppercase" style={{ background: `var(--color-${it.color})` }}>
-                Special
+              <div className="flex items-start justify-between gap-4">
+                <div className="border-ink inline-block rounded-full px-3 py-1 text-xs font-black uppercase" style={{ background: `var(--color-${it.color})` }}>
+                  Special
+                </div>
+                <ClayIcon src={it.img} alt={it.title} />
               </div>
-              <h3 className="font-display text-3xl font-bold">{it.title}</h3>
+              <h3 className="mt-5 font-display text-3xl font-bold">{it.title}</h3>
+              <p className="mt-2 text-lg font-bold text-muted-foreground">{it.sub}</p>
+
               <p className="mt-2 text-lg font-bold text-muted-foreground">{it.sub}</p>
             </motion.div>
           ))}
