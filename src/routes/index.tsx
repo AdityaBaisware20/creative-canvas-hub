@@ -40,36 +40,20 @@ function Sticky({ children, color, rotate = -2, className = "" }: { children: Re
   );
 }
 
-/* Tactile clay/papercraft showcase image with neo-brutalist frame */
-function ShowcaseImage({
-  src, alt, caption, tilt = -1.5, color = "pop-yellow",
-}: { src: string; alt: string; caption: string; tilt?: number; color?: string }) {
+/* Small 3D clay icon that sits inside each service card */
+function ClayIcon({ src, alt, size = "md" }: { src: string; alt: string; size?: "sm" | "md" }) {
+  const box = size === "sm" ? "h-14 w-14 p-1" : "h-20 w-20 p-1.5";
   return (
-    <motion.figure
-      initial={{ opacity: 0, y: 40, rotate: tilt * 2 }}
-      whileInView={{ opacity: 1, y: 0, rotate: tilt }}
-      viewport={{ once: true, margin: "-80px" }}
-      transition={{ type: "spring", stiffness: 140, damping: 16 }}
-      whileHover={{ rotate: 0, y: -6 }}
-      className="border-ink-thick shadow-cartoon-lg relative mt-12 overflow-hidden rounded-3xl bg-white"
+    <motion.div
+      whileHover={{ rotate: -6, scale: 1.08 }}
+      transition={{ type: "spring", stiffness: 300, damping: 12 }}
+      className={`border-ink shadow-cartoon-sm grid shrink-0 place-items-center overflow-hidden rounded-2xl bg-white ${box}`}
     >
-      <img
-        src={src}
-        alt={alt}
-        loading="lazy"
-        width={1024}
-        height={768}
-        className="block h-56 w-full object-cover object-center sm:h-72 md:h-96"
-      />
-      <figcaption
-        className="border-t-4 border-ink px-5 py-3 font-display text-lg font-bold sm:text-xl"
-        style={{ background: `var(--color-${color})` }}
-      >
-        {caption}
-      </figcaption>
-    </motion.figure>
+      <img src={src} alt={alt} loading="lazy" width={512} height={512} className="h-full w-full object-contain" />
+    </motion.div>
   );
 }
+
 
 /* ---------- sections ---------- */
 
