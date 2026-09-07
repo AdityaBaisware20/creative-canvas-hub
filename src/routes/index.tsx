@@ -2,10 +2,9 @@ import { createFileRoute } from "@tanstack/react-router";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import {
-  Printer, Scan, BookOpen, Layers, Maximize2, Stamp, Mail, Sparkles,
-  Sticker, Image as ImageIcon, Frame, Wallpaper, MonitorSmartphone,
-  Flag, Lightbulb, Shield, Megaphone, Palette, MapPin, Phone, MessageCircle, Mail as MailIcon,
+  Stamp, Mail, MapPin, Phone, MessageCircle, Mail as MailIcon,
 } from "lucide-react";
+
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -32,7 +31,7 @@ function Sticky({ children, color, rotate = -2, className = "" }: { children: Re
   return (
     <motion.div
       whileHover={{ rotate: 0, scale: 1.04, y: -4 }}
-      style={{ rotate, backgroundColor: `var(--color-${color})` }}
+      style={{ rotate, backgroundColor: `var(--${color})` }}
       className={`border-ink shadow-cartoon rounded-3xl px-5 py-4 ${className}`}
     >
       {children}
@@ -40,36 +39,20 @@ function Sticky({ children, color, rotate = -2, className = "" }: { children: Re
   );
 }
 
-/* Tactile clay/papercraft showcase image with neo-brutalist frame */
-function ShowcaseImage({
-  src, alt, caption, tilt = -1.5, color = "pop-yellow",
-}: { src: string; alt: string; caption: string; tilt?: number; color?: string }) {
+/* Small 3D clay icon that sits inside each service card */
+function ClayIcon({ src, alt, size = "md" }: { src: string; alt: string; size?: "sm" | "md" }) {
+  const box = size === "sm" ? "h-14 w-14 p-1" : "h-20 w-20 p-1.5";
   return (
-    <motion.figure
-      initial={{ opacity: 0, y: 40, rotate: tilt * 2 }}
-      whileInView={{ opacity: 1, y: 0, rotate: tilt }}
-      viewport={{ once: true, margin: "-80px" }}
-      transition={{ type: "spring", stiffness: 140, damping: 16 }}
-      whileHover={{ rotate: 0, y: -6 }}
-      className="border-ink-thick shadow-cartoon-lg relative mt-12 overflow-hidden rounded-3xl bg-white"
+    <motion.div
+      whileHover={{ rotate: -6, scale: 1.08 }}
+      transition={{ type: "spring", stiffness: 300, damping: 12 }}
+      className={`border-ink shadow-cartoon-sm grid shrink-0 place-items-center overflow-hidden rounded-2xl bg-white ${box}`}
     >
-      <img
-        src={src}
-        alt={alt}
-        loading="lazy"
-        width={1024}
-        height={768}
-        className="block h-56 w-full object-cover object-center sm:h-72 md:h-96"
-      />
-      <figcaption
-        className="border-t-4 border-ink px-5 py-3 font-display text-lg font-bold sm:text-xl"
-        style={{ background: `var(--color-${color})` }}
-      >
-        {caption}
-      </figcaption>
-    </motion.figure>
+      <img src={src} alt={alt} loading="lazy" width={512} height={512} className="h-full w-full object-contain" />
+    </motion.div>
   );
 }
+
 
 /* ---------- sections ---------- */
 
@@ -248,12 +231,12 @@ function Hero() {
             </span>
 
             {/* EVERYTHING — letter by letter, multicolor, jiggling */}
-            <span className="relative mt-2 block text-[18vw] sm:text-[10rem] md:text-[12rem] leading-none tracking-tight">
+            <span className="relative mt-2 block whitespace-nowrap break-keep text-[10.5vw] leading-none tracking-tight sm:text-[9rem] md:text-[12rem]">
               {word.map((ch, i) => (
                 <motion.span
                   key={i}
                   className="inline-block"
-                  style={{ color: `var(--color-${wordColors[i]})`, WebkitTextStroke: "3px var(--ink)" }}
+                  style={{ color: `var(--${wordColors[i]})`, WebkitTextStroke: "3px var(--ink)" }}
                   initial={{ y: 80, opacity: 0, rotate: -15 }}
                   animate={{ y: 0, opacity: 1, rotate: i % 2 === 0 ? -4 : 4 }}
                   transition={{ delay: 0.5 + i * 0.05, type: "spring", stiffness: 220, damping: 12 }}
@@ -312,7 +295,7 @@ function Hero() {
               {["pop-red","pop-yellow","pop-blue","pop-green","pop-pink"].map((c, i) => (
                 <motion.div key={c}
                   className="border-ink shadow-cartoon-sm h-14 w-10 rounded-sm"
-                  style={{ background: `var(--color-${c})` }}
+                  style={{ background: `var(--${c})` }}
                   animate={{ y: [0, -30, 0], rotate: [0, (i - 2) * 8, 0] }}
                   transition={{ duration: 2.4, repeat: Infinity, delay: i * 0.15, ease: "easeInOut" }}
                 />
@@ -379,12 +362,12 @@ function PrinterDoodle() {
 
 /* ---------- services ---------- */
 const CORE_SERVICES = [
-  { icon: Printer, title: "Super Jumbo Xerox", desc: "Laser quality on paper, tracing paper, cloth & engineering matte film.", color: "pop-yellow" },
-  { icon: Palette, title: "Multi Color Xerox & Prints", desc: "A4 to A0+ colour printouts. Up to 44\" wide × any length. CAD drawings & project reports.", color: "pop-pink" },
-  { icon: BookOpen, title: "Spiral & Wiro Binding", desc: "Thesis, soft binding, hard binding — make your work look professional.", color: "pop-mint" },
-  { icon: Scan, title: "Scanning & Plotting", desc: "Colour & B/W scanning. 44\" to any length on varied media.", color: "pop-blue" },
-  { icon: Layers, title: "Lamination & Delamination", desc: "Hot & cold lamination (matte, glossy, sparkle, 3D). Plus removal from documents, certificates & maps.", color: "pop-orange" },
-  { icon: Maximize2, title: "Enlargement & Reduction", desc: "A4 to A0, A0 to A4 — any size you need.", color: "pop-green" },
+  { img: "/assets/images/icons/super-jumbo-xerox.png", title: "Super Jumbo Xerox", desc: "Laser quality on paper, tracing paper, cloth & engineering matte film.", color: "pop-yellow" },
+  { img: "/assets/images/icons/multi-color-xerox.png", title: "Multi Color Xerox & Prints", desc: "A4 to A0+ colour printouts. Up to 44\" wide × any length. CAD drawings & project reports.", color: "pop-pink" },
+  { img: "/assets/images/icons/spiral-binding.png", title: "Spiral & Wiro Binding", desc: "Thesis, soft binding, hard binding — make your work look professional.", color: "pop-mint" },
+  { img: "/assets/images/icons/scanning-plotting.png", title: "Scanning & Plotting", desc: "Colour & B/W scanning. 44\" to any length on varied media.", color: "pop-blue" },
+  { img: "/assets/images/icons/lamination.png", title: "Lamination & Delamination", desc: "Hot & cold lamination (matte, glossy, sparkle, 3D). Plus removal from documents, certificates & maps.", color: "pop-orange" },
+  { img: "/assets/images/icons/enlargement.png", title: "Enlargement & Reduction", desc: "A4 to A0, A0 to A4 — any size you need.", color: "pop-green" },
 ] as const;
 
 function Services() {
@@ -392,13 +375,6 @@ function Services() {
     <section id="services" className="relative py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <SectionHeader kicker="Our daily superpowers" title="The everyday stuff" sub="Walk in with a file. Walk out with magic." color="pop-red" />
-        <ShowcaseImage
-          src="/assets/images/everyday-stuff.jpg"
-          alt="Clay-style stacks of colourful paper, spiral notebooks and a copier"
-          caption="Copies, notebooks, bindings — the daily bread & butter."
-          color="pop-yellow"
-          tilt={-1.5}
-        />
         <div className="mt-14 grid gap-7 sm:grid-cols-2 lg:grid-cols-3">
           {CORE_SERVICES.map((s, i) => (
             <motion.div
@@ -407,15 +383,14 @@ function Services() {
               variants={popIn} custom={i}
             >
               <Sticky color={s.color} rotate={i % 2 === 0 ? -1.5 : 1.5} className="h-full">
-                <div className="border-ink mb-4 grid h-14 w-14 place-items-center rounded-2xl bg-white">
-                  <s.icon className="h-7 w-7" />
-                </div>
-                <h3 className="font-display text-2xl font-bold">{s.title}</h3>
+                <ClayIcon src={s.img} alt={s.title} />
+                <h3 className="mt-4 font-display text-2xl font-bold">{s.title}</h3>
                 <p className="mt-2 font-bold leading-snug">{s.desc}</p>
               </Sticky>
             </motion.div>
           ))}
         </div>
+
       </div>
     </section>
   );
@@ -458,37 +433,40 @@ function Wheel() {
           </a>
         </div>
 
-        <div className="relative mx-auto aspect-square w-full max-w-[520px]">
-          <motion.div
-            className="absolute inset-0"
-            animate={{ rotate: 360 }}
-            transition={{ duration: 50, repeat: Infinity, ease: "linear" }}
-          >
-            {WHEEL.map((p, i) => {
-              const angle = (i / WHEEL.length) * 360;
-              return (
-                <div
-                  key={i}
-                  className="absolute left-1/2 top-1/2 origin-left"
-                  style={{ transform: `rotate(${angle}deg) translateX(60px)` }}
-                >
+        <div className="relative mx-auto flex aspect-square w-full max-w-[520px] items-center justify-center overflow-hidden">
+          <div className="relative h-[520px] w-[520px] shrink-0 origin-center scale-[0.6] sm:scale-[0.8] md:scale-100">
+            <motion.div
+              className="absolute inset-0"
+              animate={{ rotate: 360 }}
+              transition={{ duration: 50, repeat: Infinity, ease: "linear" }}
+            >
+              {WHEEL.map((p, i) => {
+                const angle = (i / WHEEL.length) * 360;
+                return (
                   <div
-                    className="border-ink shadow-cartoon-sm flex h-12 w-48 items-center justify-end rounded-full pr-5 font-display text-sm font-bold text-white"
-                    style={{ background: p.color }}
+                    key={i}
+                    className="absolute left-1/2 top-1/2 origin-left"
+                    style={{ transform: `rotate(${angle}deg) translateX(60px) translateY(-50%)` }}
                   >
-                    {p.label}
+                    <div
+                      className="border-ink shadow-cartoon-sm flex h-12 w-48 items-center justify-end whitespace-nowrap rounded-full pr-5 font-display text-sm font-bold text-white"
+                      style={{ background: p.color }}
+                    >
+                      {p.label}
+                    </div>
                   </div>
-                </div>
-              );
-            })}
-          </motion.div>
-          {/* center */}
-          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-            <div className="border-ink shadow-cartoon grid h-24 w-24 place-items-center rounded-full bg-white font-display text-2xl font-bold">
-              TCC
+                );
+              })}
+            </motion.div>
+            {/* center */}
+            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+              <div className="border-ink shadow-cartoon grid h-24 w-24 place-items-center rounded-full bg-white font-display text-2xl font-bold">
+                TCC
+              </div>
             </div>
           </div>
         </div>
+
       </div>
     </section>
   );
@@ -496,22 +474,22 @@ function Wheel() {
 
 /* ---------- big applications: industrial + interior ---------- */
 const INDUSTRIAL = [
-  { icon: Shield, title: "Safety Signage", color: "pop-red" },
-  { icon: Layers, title: "Vinyl + Foamsheet", color: "pop-blue" },
-  { icon: Megaphone, title: "Rollup Standees", color: "pop-orange" },
-  { icon: Flag, title: "Flex / Cloth / Banners", color: "pop-pink" },
-  { icon: Sparkles, title: "Retro Reflective Vinyl", color: "pop-mint" },
-  { icon: Lightbulb, title: "Glow In The Dark", color: "pop-purple" },
-  { icon: Sticker, title: "Print & Cut Stickers", color: "pop-yellow" },
+  { img: "/assets/images/icons/safety-signage.png", title: "Safety Signage", color: "pop-red" },
+  { img: "/assets/images/icons/vinyl-foamsheet.png", title: "Vinyl + Foamsheet", color: "pop-blue" },
+  { img: "/assets/images/icons/rollup-standee.png", title: "Rollup Standees", color: "pop-orange" },
+  { img: "/assets/images/icons/flex-banner.png", title: "Flex / Cloth / Banners", color: "pop-pink" },
+  { img: "/assets/images/icons/reflective-vinyl.png", title: "Retro Reflective Vinyl", color: "pop-mint" },
+  { img: "/assets/images/icons/glow-dark.png", title: "Glow In The Dark", color: "pop-purple" },
+  { img: "/assets/images/icons/print-cut-stickers.png", title: "Print & Cut Stickers", color: "pop-yellow" },
 ];
 const INTERIOR = [
-  { icon: ImageIcon, title: "Canvas Prints", color: "pop-orange" },
-  { icon: Wallpaper, title: "Customized Wallpapers", color: "pop-purple" },
-  { icon: MonitorSmartphone, title: "Window / Frosted Films", color: "pop-mint" },
-  { icon: Layers, title: "Vinyl / Rexine", color: "pop-pink" },
-  { icon: Frame, title: "Poster Printing", color: "pop-blue" },
-  { icon: ImageIcon, title: "One Way Vision", color: "pop-green" },
-  { icon: Palette, title: "Monochrome Paintings", color: "pop-red" },
+  { img: "/assets/images/icons/canvas-prints.png", title: "Canvas Prints", color: "pop-orange" },
+  { img: "/assets/images/icons/wallpapers.png", title: "Customized Wallpapers", color: "pop-purple" },
+  { img: "/assets/images/icons/frosted-film.png", title: "Window / Frosted Films", color: "pop-mint" },
+  { img: "/assets/images/icons/vinyl-rexine.png", title: "Vinyl / Rexine", color: "pop-pink" },
+  { img: "/assets/images/icons/poster-printing.png", title: "Poster Printing", color: "pop-blue" },
+  { img: "/assets/images/icons/one-way-vision.png", title: "One Way Vision", color: "pop-green" },
+  { img: "/assets/images/icons/monochrome-paintings.png", title: "Monochrome Paintings", color: "pop-red" },
 ];
 
 function BigStuff() {
@@ -519,26 +497,12 @@ function BigStuff() {
     <section id="big" className="py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <SectionHeader kicker="Goes big. Goes loud." title="Industrial applications" sub="From the warehouse floor to the highway billboard." color="pop-blue" />
-        <ShowcaseImage
-          src="/assets/images/industrial.jpg"
-          alt="Clay-style miniature safety signs, foam boards and a rollup standee"
-          caption="Safety signage, foam boards, standees — built for the floor."
-          color="pop-blue"
-          tilt={1.5}
-        />
         <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {INDUSTRIAL.map((s, i) => <PillCard key={s.title} {...s} i={i} />)}
         </div>
 
         <div className="mt-24">
           <SectionHeader id="interior" kicker="Make any room sing." title="Interior applications" sub="Your walls deserve better." color="pop-purple" />
-          <ShowcaseImage
-            src="/assets/images/interior.jpg"
-            alt="Clay-style wallpaper rolls, canvas on an easel and a framed poster"
-            caption="Wallpapers, canvas, posters — walls with a personality."
-            color="pop-purple"
-            tilt={-1.5}
-          />
           <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {INTERIOR.map((s, i) => <PillCard key={s.title} {...s} i={i} />)}
           </div>
@@ -548,7 +512,7 @@ function BigStuff() {
   );
 }
 
-function PillCard({ icon: Icon, title, color, i }: { icon: typeof Shield; title: string; color: string; i: number }) {
+function PillCard({ img, title, color, i }: { img: string; title: string; color: string; i: number }) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 24, rotate: -3 }}
@@ -556,37 +520,29 @@ function PillCard({ icon: Icon, title, color, i }: { icon: typeof Shield; title:
       viewport={{ once: true }}
       transition={{ delay: i * 0.05, type: "spring", stiffness: 180, damping: 14 }}
       whileHover={{ y: -6, rotate: 0, scale: 1.04 }}
-      className="border-ink shadow-cartoon flex items-center gap-3 rounded-full px-5 py-4"
-      style={{ background: `var(--color-${color})` }}
+      className="border-ink shadow-cartoon flex items-center gap-3 rounded-3xl px-4 py-4"
+      style={{ background: `var(--${color})` }}
     >
-      <div className="border-ink grid h-10 w-10 shrink-0 place-items-center rounded-full bg-white">
-        <Icon className="h-5 w-5" />
-      </div>
+      <ClayIcon src={img} alt={title} size="sm" />
       <span className="font-display text-lg font-bold leading-tight">{title}</span>
     </motion.div>
   );
 }
 
+
 /* ---------- specials strip ---------- */
 function Specials() {
   const items = [
-    { title: "Stickers", sub: "Any shape. Any size.", emoji: "🏷️", color: "pop-red" },
-    { title: "Customized Envelopes", sub: "Money & wedding.", emoji: "💌", color: "pop-green" },
-    { title: "UV & Foiling", sub: "Gold, silver, copper, red, blue, white.", emoji: "✨", color: "pop-yellow" },
-    { title: "CAD Printouts on Laser", sub: "A4 → A0+, up to 44\" any length.", emoji: "📐", color: "pop-blue" },
-    { title: "Ammonia / Blue Prints", sub: "Tracing & garware films.", emoji: "🧪", color: "pop-purple" },
+    { title: "Stickers", sub: "Any shape. Any size.", img: "/assets/images/icons/stickers.png", color: "pop-red" },
+    { title: "Customized Envelopes", sub: "Money & wedding.", img: "/assets/images/icons/envelopes.png", color: "pop-green" },
+    { title: "UV & Foiling", sub: "Gold, silver, copper, red, blue, white.", img: "/assets/images/icons/uv-foiling.png", color: "pop-yellow" },
+    { title: "CAD Printouts on Laser", sub: "A4 → A0+, up to 44\" any length.", img: "/assets/images/icons/cad-printouts.png", color: "pop-blue" },
+    { title: "Ammonia / Blue Prints", sub: "Tracing & garware films.", img: "/assets/images/icons/blueprints.png", color: "pop-purple" },
   ];
   return (
     <section className="paper-bg py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <SectionHeader kicker="House specials" title="The fun extras" sub="The stuff people drive across town for." color="pop-pink" />
-        <ShowcaseImage
-          src="/assets/images/fun-extras.jpg"
-          alt="Clay-style glossy die-cut stickers and gold foil embossed envelopes"
-          caption="Die-cut stickers, foiling, fancy envelopes — the show-offs."
-          color="pop-pink"
-          tilt={1.5}
-        />
         <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {items.map((it, i) => (
             <motion.div
@@ -598,11 +554,15 @@ function Specials() {
               whileHover={{ y: -8, rotate: -1 }}
               className="border-ink-thick shadow-cartoon-lg relative overflow-hidden rounded-3xl bg-white p-7"
             >
-              <div className="absolute right-3 top-3 text-5xl">{it.emoji}</div>
-              <div className="border-ink mb-5 inline-block rounded-full px-3 py-1 text-xs font-black uppercase" style={{ background: `var(--color-${it.color})` }}>
-                Special
+              <div className="flex items-start justify-between gap-4">
+                <div className="border-ink inline-block rounded-full px-3 py-1 text-xs font-black uppercase" style={{ background: `var(--${it.color})` }}>
+                  Special
+                </div>
+                <ClayIcon src={it.img} alt={it.title} />
               </div>
-              <h3 className="font-display text-3xl font-bold">{it.title}</h3>
+              <h3 className="mt-5 font-display text-3xl font-bold">{it.title}</h3>
+              <p className="mt-2 text-lg font-bold text-muted-foreground">{it.sub}</p>
+
               <p className="mt-2 text-lg font-bold text-muted-foreground">{it.sub}</p>
             </motion.div>
           ))}
@@ -634,7 +594,7 @@ function HowItWorks() {
               transition={{ delay: i * 0.1, type: "spring" }}
               className="border-ink-thick shadow-cartoon-lg relative rounded-3xl bg-white p-7"
             >
-              <div className="font-display text-6xl font-bold" style={{ color: `var(--color-${s.c})` }}>{s.n}</div>
+              <div className="font-display text-6xl font-bold" style={{ color: `var(--${s.c})` }}>{s.n}</div>
               <div className="mt-2 text-4xl">{s.emoji}</div>
               <h3 className="mt-3 font-display text-2xl font-bold">{s.t}</h3>
               <p className="mt-1 font-bold">{s.d}</p>
@@ -761,7 +721,7 @@ function SectionHeader({ kicker, title, sub, color, id }: { kicker: string; titl
     <div id={id} className="max-w-3xl">
       <motion.span
         initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}
-        className="font-marker text-3xl" style={{ color: `var(--color-${color})` }}
+        className="font-marker text-3xl" style={{ color: `var(--${color})` }}
       >
         {kicker}
       </motion.span>
