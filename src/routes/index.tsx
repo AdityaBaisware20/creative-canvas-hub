@@ -31,7 +31,7 @@ function Sticky({ children, color, rotate = -2, className = "" }: { children: Re
   return (
     <motion.div
       whileHover={{ rotate: 0, scale: 1.04, y: -4 }}
-      style={{ rotate, backgroundColor: `var(--color-${color})` }}
+      style={{ rotate, backgroundColor: `var(--${color})` }}
       className={`border-ink shadow-cartoon rounded-3xl px-5 py-4 ${className}`}
     >
       {children}
@@ -236,7 +236,7 @@ function Hero() {
                 <motion.span
                   key={i}
                   className="inline-block"
-                  style={{ color: `var(--color-${wordColors[i]})`, WebkitTextStroke: "3px var(--ink)" }}
+                  style={{ color: `var(--${wordColors[i]})`, WebkitTextStroke: "3px var(--ink)" }}
                   initial={{ y: 80, opacity: 0, rotate: -15 }}
                   animate={{ y: 0, opacity: 1, rotate: i % 2 === 0 ? -4 : 4 }}
                   transition={{ delay: 0.5 + i * 0.05, type: "spring", stiffness: 220, damping: 12 }}
@@ -295,7 +295,7 @@ function Hero() {
               {["pop-red","pop-yellow","pop-blue","pop-green","pop-pink"].map((c, i) => (
                 <motion.div key={c}
                   className="border-ink shadow-cartoon-sm h-14 w-10 rounded-sm"
-                  style={{ background: `var(--color-${c})` }}
+                  style={{ background: `var(--${c})` }}
                   animate={{ y: [0, -30, 0], rotate: [0, (i - 2) * 8, 0] }}
                   transition={{ duration: 2.4, repeat: Infinity, delay: i * 0.15, ease: "easeInOut" }}
                 />
@@ -521,7 +521,7 @@ function PillCard({ img, title, color, i }: { img: string; title: string; color:
       transition={{ delay: i * 0.05, type: "spring", stiffness: 180, damping: 14 }}
       whileHover={{ y: -6, rotate: 0, scale: 1.04 }}
       className="border-ink shadow-cartoon flex items-center gap-3 rounded-3xl px-4 py-4"
-      style={{ background: `var(--color-${color})` }}
+      style={{ background: `var(--${color})` }}
     >
       <ClayIcon src={img} alt={title} size="sm" />
       <span className="font-display text-lg font-bold leading-tight">{title}</span>
@@ -555,7 +555,7 @@ function Specials() {
               className="border-ink-thick shadow-cartoon-lg relative overflow-hidden rounded-3xl bg-white p-7"
             >
               <div className="flex items-start justify-between gap-4">
-                <div className="border-ink inline-block rounded-full px-3 py-1 text-xs font-black uppercase" style={{ background: `var(--color-${it.color})` }}>
+                <div className="border-ink inline-block rounded-full px-3 py-1 text-xs font-black uppercase" style={{ background: `var(--${it.color})` }}>
                   Special
                 </div>
                 <ClayIcon src={it.img} alt={it.title} />
@@ -594,7 +594,7 @@ function HowItWorks() {
               transition={{ delay: i * 0.1, type: "spring" }}
               className="border-ink-thick shadow-cartoon-lg relative rounded-3xl bg-white p-7"
             >
-              <div className="font-display text-6xl font-bold" style={{ color: `var(--color-${s.c})` }}>{s.n}</div>
+              <div className="font-display text-6xl font-bold" style={{ color: `var(--${s.c})` }}>{s.n}</div>
               <div className="mt-2 text-4xl">{s.emoji}</div>
               <h3 className="mt-3 font-display text-2xl font-bold">{s.t}</h3>
               <p className="mt-1 font-bold">{s.d}</p>
@@ -721,7 +721,7 @@ function SectionHeader({ kicker, title, sub, color, id }: { kicker: string; titl
     <div id={id} className="max-w-3xl">
       <motion.span
         initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}
-        className="font-marker text-3xl" style={{ color: `var(--color-${color})` }}
+        className="font-marker text-3xl" style={{ color: `var(--${color})` }}
       >
         {kicker}
       </motion.span>
