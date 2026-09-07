@@ -2,10 +2,9 @@ import { createFileRoute } from "@tanstack/react-router";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import {
-  Printer, Scan, BookOpen, Layers, Maximize2, Stamp, Mail, Sparkles,
-  Sticker, Image as ImageIcon, Frame, Wallpaper, MonitorSmartphone,
-  Flag, Lightbulb, Shield, Megaphone, Palette, MapPin, Phone, MessageCircle, Mail as MailIcon,
+  Stamp, Mail, MapPin, Phone, MessageCircle, Mail as MailIcon,
 } from "lucide-react";
+
 
 export const Route = createFileRoute("/")({
   head: () => ({
