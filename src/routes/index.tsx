@@ -372,10 +372,10 @@ const CORE_SERVICES = [
 
 function Services() {
   return (
-    <section id="services" className="relative py-24">
+    <section id="services" className="relative py-16 sm:py-20 lg:py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <SectionHeader kicker="Our daily superpowers" title="The everyday stuff" sub="Walk in with a file. Walk out with magic." color="pop-red" />
-        <div className="mt-14 grid gap-7 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-10 grid gap-6 sm:mt-14 sm:grid-cols-2 sm:gap-7 lg:grid-cols-3">
           {CORE_SERVICES.map((s, i) => (
             <motion.div
               key={s.title}
@@ -384,8 +384,8 @@ function Services() {
             >
               <Sticky color={s.color} rotate={i % 2 === 0 ? -1.5 : 1.5} className="h-full">
                 <ClayIcon src={s.img} alt={s.title} />
-                <h3 className="mt-4 font-display text-2xl font-bold">{s.title}</h3>
-                <p className="mt-2 font-bold leading-snug">{s.desc}</p>
+                <h3 className="mt-4 font-display text-xl font-bold sm:text-2xl">{s.title}</h3>
+                <p className="mt-2 text-sm font-bold leading-snug sm:text-base">{s.desc}</p>
               </Sticky>
             </motion.div>
           ))}
@@ -417,24 +417,24 @@ const WHEEL = [
 
 function Wheel() {
   return (
-    <section className="relative overflow-hidden py-24" style={{ background: "var(--pop-yellow)" }}>
-      <div className="mx-auto grid max-w-7xl items-center gap-12 px-4 sm:px-6 md:grid-cols-2">
+    <section className="relative overflow-hidden py-16 sm:py-20 lg:py-24" style={{ background: "var(--pop-yellow)" }}>
+      <div className="mx-auto grid max-w-7xl items-center gap-10 px-4 sm:px-6 lg:grid-cols-2 lg:gap-12">
         <div>
-          <span className="font-marker text-3xl" style={{ color: "var(--pop-red)" }}>spin me!</span>
-          <h2 className="mt-2 font-display text-5xl font-bold leading-none sm:text-6xl">
+          <span className="font-marker text-2xl sm:text-3xl" style={{ color: "var(--pop-red)" }}>spin me!</span>
+          <h2 className="mt-2 font-display text-[2.25rem] font-bold leading-none sm:text-5xl lg:text-6xl">
             We specialize<br />in <span style={{ color: "var(--pop-red)" }}>literally</span><br />all of this.
           </h2>
-          <p className="mt-6 max-w-md text-lg font-bold">
+          <p className="mt-5 max-w-md text-base font-bold sm:mt-6 sm:text-lg">
             Fifteen different things on one little wheel. Pick one. Pick five. Pick all of them. We're game.
           </p>
           <a href="https://wa.me/917276141392" target="_blank" rel="noreferrer"
-            className="mt-8 inline-block border-ink shadow-cartoon rounded-2xl bg-white px-6 py-3 font-display text-lg font-bold">
+            className="mt-7 inline-block border-ink shadow-cartoon rounded-2xl bg-white px-5 py-3 font-display text-base font-bold sm:mt-8 sm:px-6 sm:text-lg">
             Send your file on WhatsApp →
           </a>
         </div>
 
-        <div className="relative mx-auto flex aspect-square w-full max-w-[520px] items-center justify-center overflow-hidden">
-          <div className="relative h-[520px] w-[520px] shrink-0 origin-center scale-[0.6] sm:scale-[0.8] md:scale-100">
+        <div className="relative mx-auto flex aspect-square w-full max-w-[340px] items-center justify-center overflow-hidden sm:max-w-[440px] lg:max-w-[520px]">
+          <div className="relative h-[520px] w-[520px] shrink-0 origin-center scale-[0.63] sm:scale-[0.84] lg:scale-100">
             <motion.div
               className="absolute inset-0"
               animate={{ rotate: 360 }}
@@ -579,7 +579,7 @@ function HowItWorks() {
     { n: "04", t: "Pick it up smiling", d: "Or get it delivered. Easy.", emoji: "🎉", c: "pop-pink" },
   ];
   return (
-    <section className="py-24" style={{ background: "var(--pop-mint)" }}>
+    <section className="py-16 sm:py-20 lg:py-24" style={{ background: "var(--pop-mint)" }}>
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <SectionHeader kicker="As easy as 1·2·3·4" title="How it works" sub="No mystery. No forms. Just printing." color="pop-red" />
         <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
@@ -607,15 +607,15 @@ function HowItWorks() {
 /* ---------- visit / contact ---------- */
 function Visit() {
   return (
-    <section id="visit" className="py-24">
+    <section id="visit" className="py-16 sm:py-20 lg:py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <SectionHeader kicker="Come say hi" title="Visit the shop" sub="Right next to Yeshwant Stadium. You can't miss the red sign." color="pop-orange" />
 
-        <div className="mt-12 grid gap-8 lg:grid-cols-5">
+        <div className="mt-10 grid gap-6 sm:mt-12 sm:gap-8 lg:grid-cols-5">
           {/* hand-drawn map */}
           <motion.div
             initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-            className="border-ink-thick shadow-cartoon-lg overflow-hidden rounded-3xl bg-white p-6 lg:col-span-3"
+            className="border-ink-thick shadow-cartoon-lg overflow-hidden rounded-3xl bg-white p-4 sm:p-6 lg:col-span-3"
           >
             <MapDoodle />
           </motion.div>
@@ -623,10 +623,10 @@ function Visit() {
           {/* contact card */}
           <motion.div
             initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }}
-            className="border-ink-thick shadow-cartoon-lg rounded-3xl p-7 lg:col-span-2"
+            className="border-ink-thick shadow-cartoon-lg rounded-3xl p-5 sm:p-7 lg:col-span-2"
             style={{ background: "var(--pop-yellow)" }}
           >
-            <h3 className="font-display text-3xl font-bold">True Copy Centre Pvt. Ltd.</h3>
+            <h3 className="font-display text-2xl font-bold sm:text-3xl">True Copy Centre Pvt. Ltd.</h3>
             <p className="mt-2 flex items-start gap-2 font-bold">
               <MapPin className="mt-1 h-5 w-5 shrink-0" />
               58, Yeshwant Stadium, Dhantoli, Nagpur — 12
