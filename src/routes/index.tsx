@@ -91,7 +91,7 @@ function Nav() {
           ))}
         </div>
         <a href="tel:+919822224644" className="border-ink shadow-cartoon-sm shrink-0 whitespace-nowrap rounded-full px-3 py-2 font-display text-sm font-bold sm:px-4" style={{ background: "var(--pop-yellow)" }}>
-          📞 <span className="hidden xs:inline">Call us</span><span className="xs:hidden">Call</span>
+          📞 <span className="hidden sm:inline">Call us</span>
         </a>
       </div>
     </nav>
@@ -196,7 +196,7 @@ function Hero() {
         ))}
       </motion.div>
 
-      <div className="relative mx-auto max-w-7xl px-4 pt-14 pb-28 sm:px-6 sm:pt-20 sm:pb-36">
+      <div className="relative mx-auto max-w-7xl px-4 pt-12 pb-20 sm:px-6 sm:pt-20 sm:pb-32 lg:pb-36">
         {/* washi tape strips */}
         <div className="pointer-events-none absolute left-1/2 top-6 -translate-x-1/2 rotate-[-4deg] hidden sm:block">
           <div className="border-ink h-6 w-44 rounded-sm opacity-90"
@@ -205,7 +205,7 @@ function Hero() {
 
         <motion.div initial="hidden" animate="show" className="text-center">
           {/* badge */}
-          <motion.div variants={popIn} className="mx-auto mb-6 inline-flex items-center gap-2 rounded-full border-ink shadow-cartoon-sm bg-white px-4 py-2 text-sm font-black">
+          <motion.div variants={popIn} className="mx-auto mb-6 inline-flex max-w-full items-center gap-2 rounded-full border-ink shadow-cartoon-sm bg-white px-3 py-2 text-[11px] font-black sm:px-4 sm:text-sm">
             <span className="relative inline-flex h-2.5 w-2.5">
               <span className="absolute inset-0 animate-ping rounded-full opacity-75" style={{ background: "var(--pop-green)" }} />
               <span className="relative inline-block h-2.5 w-2.5 rounded-full" style={{ background: "var(--pop-green)" }} />
@@ -231,7 +231,7 @@ function Hero() {
             </span>
 
             {/* EVERYTHING — letter by letter, multicolor, jiggling */}
-            <span className="relative mt-2 block whitespace-nowrap break-keep text-[10.5vw] leading-none tracking-tight sm:text-[9rem] md:text-[12rem]">
+            <span className="relative mt-2 block whitespace-nowrap break-keep text-[10.5vw] leading-none tracking-tight sm:text-[9.5vw] lg:text-[9rem] xl:text-[11rem]">
               {word.map((ch, i) => (
                 <motion.span
                   key={i}
@@ -253,26 +253,26 @@ function Hero() {
               >✨</motion.span>
             </span>
 
-            <span className="mt-4 block font-marker text-5xl font-bold sm:text-7xl" style={{ color: "var(--pop-blue)" }}>
+            <span className="mt-4 block font-marker text-4xl font-bold sm:text-6xl lg:text-7xl" style={{ color: "var(--pop-blue)" }}>
               ...yes, even <span className="underline decoration-wavy decoration-[var(--pop-red)]">that</span> thing.
             </span>
           </motion.h1>
 
-          <motion.p variants={popIn} custom={2} className="mx-auto mt-8 max-w-2xl text-lg font-bold text-muted-foreground sm:text-xl">
+          <motion.p variants={popIn} custom={2} className="mx-auto mt-6 max-w-2xl text-base font-bold text-muted-foreground sm:mt-8 sm:text-xl">
             Xerox, banners, stickers, signage, wallpapers, canvas, foiling, blueprints — if you can imagine it on a surface, we can put it there.
           </motion.p>
 
           {/* CTAs */}
-          <motion.div variants={popIn} custom={3} className="mt-10 flex flex-wrap items-center justify-center gap-4">
+          <motion.div variants={popIn} custom={3} className="mt-8 flex flex-wrap items-center justify-center gap-3 sm:mt-10 sm:gap-4">
             <motion.a whileHover={{ scale: 1.05, rotate: -1 }} whileTap={{ scale: 0.96 }}
               href="https://wa.me/917276141392" target="_blank" rel="noreferrer"
-              className="border-ink shadow-cartoon-lg rounded-2xl px-7 py-4 font-display text-xl font-bold text-white"
+              className="border-ink shadow-cartoon-lg rounded-2xl px-5 py-3 font-display text-base font-bold text-white sm:px-7 sm:py-4 sm:text-xl"
               style={{ background: "var(--pop-green)" }}>
               💬 WhatsApp your file
             </motion.a>
             <motion.a whileHover={{ scale: 1.05, rotate: 1 }} whileTap={{ scale: 0.96 }}
               href="#services"
-              className="border-ink shadow-cartoon-lg rounded-2xl bg-white px-7 py-4 font-display text-xl font-bold">
+              className="border-ink shadow-cartoon-lg rounded-2xl bg-white px-5 py-3 font-display text-base font-bold sm:px-7 sm:py-4 sm:text-xl">
               See what we make ↓
             </motion.a>
           </motion.div>
