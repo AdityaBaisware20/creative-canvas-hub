@@ -75,23 +75,23 @@ function TopBar() {
 function Nav() {
   return (
     <nav className="sticky top-0 z-50 bg-cream/90 backdrop-blur border-b-4 border-ink" style={{ background: "color-mix(in oklab, var(--cream) 90%, transparent)" }}>
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6">
-        <a href="#top" className="flex items-center gap-2">
-          <div className="border-ink shadow-cartoon-sm grid h-11 w-11 place-items-center rounded-xl" style={{ background: "var(--pop-red)" }}>
+      <div className="mx-auto grid max-w-7xl grid-cols-[minmax(0,1fr)_auto] items-center gap-3 px-4 py-3 sm:px-6 md:flex md:justify-between">
+        <a href="#top" className="flex min-w-0 items-center gap-2">
+          <div className="border-ink shadow-cartoon-sm grid h-10 w-10 shrink-0 place-items-center rounded-xl sm:h-11 sm:w-11" style={{ background: "var(--pop-red)" }}>
             <span className="font-display text-xl font-black text-white">T</span>
           </div>
-          <div className="leading-tight">
-            <div className="font-display text-lg font-bold">True Copy Centre</div>
-            <div className="text-xs font-bold text-muted-foreground">Nagpur · since you needed prints</div>
+          <div className="min-w-0 leading-tight">
+            <div className="truncate font-display text-base font-bold sm:text-lg">True Copy Centre</div>
+            <div className="hidden text-xs font-bold text-muted-foreground sm:block">Nagpur · since you needed prints</div>
           </div>
         </a>
-        <div className="hidden gap-6 md:flex">
+        <div className="hidden gap-5 md:flex lg:gap-6">
           {[["Services", "#services"], ["Big Stuff", "#big"], ["Interiors", "#interior"], ["Visit", "#visit"]].map(([n, h]) => (
-            <a key={n} href={h} className="font-display text-base font-bold hover:underline decoration-4 underline-offset-4" style={{ textDecorationColor: "var(--pop-red)" }}>{n}</a>
+            <a key={n} href={h} className="whitespace-nowrap font-display text-base font-bold hover:underline decoration-4 underline-offset-4" style={{ textDecorationColor: "var(--pop-red)" }}>{n}</a>
           ))}
         </div>
-        <a href="tel:+919822224644" className="border-ink shadow-cartoon-sm rounded-full px-4 py-2 font-display text-sm font-bold" style={{ background: "var(--pop-yellow)" }}>
-          📞 Call us
+        <a href="tel:+919822224644" className="border-ink shadow-cartoon-sm shrink-0 whitespace-nowrap rounded-full px-3 py-2 font-display text-sm font-bold sm:px-4" style={{ background: "var(--pop-yellow)" }}>
+          📞 <span className="hidden sm:inline">Call us</span>
         </a>
       </div>
     </nav>
@@ -196,7 +196,7 @@ function Hero() {
         ))}
       </motion.div>
 
-      <div className="relative mx-auto max-w-7xl px-4 pt-14 pb-28 sm:px-6 sm:pt-20 sm:pb-36">
+      <div className="relative mx-auto max-w-7xl px-4 pt-12 pb-20 sm:px-6 sm:pt-20 sm:pb-32 lg:pb-36">
         {/* washi tape strips */}
         <div className="pointer-events-none absolute left-1/2 top-6 -translate-x-1/2 rotate-[-4deg] hidden sm:block">
           <div className="border-ink h-6 w-44 rounded-sm opacity-90"
@@ -205,7 +205,7 @@ function Hero() {
 
         <motion.div initial="hidden" animate="show" className="text-center">
           {/* badge */}
-          <motion.div variants={popIn} className="mx-auto mb-6 inline-flex items-center gap-2 rounded-full border-ink shadow-cartoon-sm bg-white px-4 py-2 text-sm font-black">
+          <motion.div variants={popIn} className="mx-auto mb-6 inline-flex max-w-full items-center gap-2 rounded-full border-ink shadow-cartoon-sm bg-white px-3 py-2 text-[11px] font-black sm:px-4 sm:text-sm">
             <span className="relative inline-flex h-2.5 w-2.5">
               <span className="absolute inset-0 animate-ping rounded-full opacity-75" style={{ background: "var(--pop-green)" }} />
               <span className="relative inline-block h-2.5 w-2.5 rounded-full" style={{ background: "var(--pop-green)" }} />
@@ -231,7 +231,7 @@ function Hero() {
             </span>
 
             {/* EVERYTHING — letter by letter, multicolor, jiggling */}
-            <span className="relative mt-2 block whitespace-nowrap break-keep text-[10.5vw] leading-none tracking-tight sm:text-[9rem] md:text-[12rem]">
+            <span className="relative mt-2 block whitespace-nowrap break-keep text-[10.5vw] leading-none tracking-tight sm:text-[9.5vw] lg:text-[9rem] xl:text-[11rem]">
               {word.map((ch, i) => (
                 <motion.span
                   key={i}
@@ -253,26 +253,26 @@ function Hero() {
               >✨</motion.span>
             </span>
 
-            <span className="mt-4 block font-marker text-5xl font-bold sm:text-7xl" style={{ color: "var(--pop-blue)" }}>
+            <span className="mt-4 block font-marker text-4xl font-bold sm:text-6xl lg:text-7xl" style={{ color: "var(--pop-blue)" }}>
               ...yes, even <span className="underline decoration-wavy decoration-[var(--pop-red)]">that</span> thing.
             </span>
           </motion.h1>
 
-          <motion.p variants={popIn} custom={2} className="mx-auto mt-8 max-w-2xl text-lg font-bold text-muted-foreground sm:text-xl">
+          <motion.p variants={popIn} custom={2} className="mx-auto mt-6 max-w-2xl text-base font-bold text-muted-foreground sm:mt-8 sm:text-xl">
             Xerox, banners, stickers, signage, wallpapers, canvas, foiling, blueprints — if you can imagine it on a surface, we can put it there.
           </motion.p>
 
           {/* CTAs */}
-          <motion.div variants={popIn} custom={3} className="mt-10 flex flex-wrap items-center justify-center gap-4">
+          <motion.div variants={popIn} custom={3} className="mt-8 flex flex-wrap items-center justify-center gap-3 sm:mt-10 sm:gap-4">
             <motion.a whileHover={{ scale: 1.05, rotate: -1 }} whileTap={{ scale: 0.96 }}
               href="https://wa.me/917276141392" target="_blank" rel="noreferrer"
-              className="border-ink shadow-cartoon-lg rounded-2xl px-7 py-4 font-display text-xl font-bold text-white"
+              className="border-ink shadow-cartoon-lg rounded-2xl px-5 py-3 font-display text-base font-bold text-white sm:px-7 sm:py-4 sm:text-xl"
               style={{ background: "var(--pop-green)" }}>
               💬 WhatsApp your file
             </motion.a>
             <motion.a whileHover={{ scale: 1.05, rotate: 1 }} whileTap={{ scale: 0.96 }}
               href="#services"
-              className="border-ink shadow-cartoon-lg rounded-2xl bg-white px-7 py-4 font-display text-xl font-bold">
+              className="border-ink shadow-cartoon-lg rounded-2xl bg-white px-5 py-3 font-display text-base font-bold sm:px-7 sm:py-4 sm:text-xl">
               See what we make ↓
             </motion.a>
           </motion.div>
@@ -372,10 +372,10 @@ const CORE_SERVICES = [
 
 function Services() {
   return (
-    <section id="services" className="relative py-24">
+    <section id="services" className="relative py-16 sm:py-20 lg:py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <SectionHeader kicker="Our daily superpowers" title="The everyday stuff" sub="Walk in with a file. Walk out with magic." color="pop-red" />
-        <div className="mt-14 grid gap-7 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-10 grid gap-6 sm:mt-14 sm:grid-cols-2 sm:gap-7 lg:grid-cols-3">
           {CORE_SERVICES.map((s, i) => (
             <motion.div
               key={s.title}
@@ -384,8 +384,8 @@ function Services() {
             >
               <Sticky color={s.color} rotate={i % 2 === 0 ? -1.5 : 1.5} className="h-full">
                 <ClayIcon src={s.img} alt={s.title} />
-                <h3 className="mt-4 font-display text-2xl font-bold">{s.title}</h3>
-                <p className="mt-2 font-bold leading-snug">{s.desc}</p>
+                <h3 className="mt-4 font-display text-xl font-bold sm:text-2xl">{s.title}</h3>
+                <p className="mt-2 text-sm font-bold leading-snug sm:text-base">{s.desc}</p>
               </Sticky>
             </motion.div>
           ))}
@@ -417,24 +417,24 @@ const WHEEL = [
 
 function Wheel() {
   return (
-    <section className="relative overflow-hidden py-24" style={{ background: "var(--pop-yellow)" }}>
-      <div className="mx-auto grid max-w-7xl items-center gap-12 px-4 sm:px-6 md:grid-cols-2">
+    <section className="relative overflow-hidden py-16 sm:py-20 lg:py-24" style={{ background: "var(--pop-yellow)" }}>
+      <div className="mx-auto grid max-w-7xl items-center gap-10 px-4 sm:px-6 lg:grid-cols-2 lg:gap-12">
         <div>
-          <span className="font-marker text-3xl" style={{ color: "var(--pop-red)" }}>spin me!</span>
-          <h2 className="mt-2 font-display text-5xl font-bold leading-none sm:text-6xl">
+          <span className="font-marker text-2xl sm:text-3xl" style={{ color: "var(--pop-red)" }}>spin me!</span>
+          <h2 className="mt-2 font-display text-[2.25rem] font-bold leading-none sm:text-5xl lg:text-6xl">
             We specialize<br />in <span style={{ color: "var(--pop-red)" }}>literally</span><br />all of this.
           </h2>
-          <p className="mt-6 max-w-md text-lg font-bold">
+          <p className="mt-5 max-w-md text-base font-bold sm:mt-6 sm:text-lg">
             Fifteen different things on one little wheel. Pick one. Pick five. Pick all of them. We're game.
           </p>
           <a href="https://wa.me/917276141392" target="_blank" rel="noreferrer"
-            className="mt-8 inline-block border-ink shadow-cartoon rounded-2xl bg-white px-6 py-3 font-display text-lg font-bold">
+            className="mt-7 inline-block border-ink shadow-cartoon rounded-2xl bg-white px-5 py-3 font-display text-base font-bold sm:mt-8 sm:px-6 sm:text-lg">
             Send your file on WhatsApp →
           </a>
         </div>
 
-        <div className="relative mx-auto flex aspect-square w-full max-w-[520px] items-center justify-center overflow-hidden">
-          <div className="relative h-[520px] w-[520px] shrink-0 origin-center scale-[0.6] sm:scale-[0.8] md:scale-100">
+        <div className="relative mx-auto flex aspect-square w-full max-w-[340px] items-center justify-center overflow-hidden sm:max-w-[440px] lg:max-w-[520px]">
+          <div className="relative h-[520px] w-[520px] shrink-0 origin-center scale-[0.63] sm:scale-[0.84] lg:scale-100">
             <motion.div
               className="absolute inset-0"
               animate={{ rotate: 360 }}
@@ -494,16 +494,16 @@ const INTERIOR = [
 
 function BigStuff() {
   return (
-    <section id="big" className="py-24">
+    <section id="big" className="py-16 sm:py-20 lg:py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <SectionHeader kicker="Goes big. Goes loud." title="Industrial applications" sub="From the warehouse floor to the highway billboard." color="pop-blue" />
-        <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-10 grid gap-5 sm:mt-12 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {INDUSTRIAL.map((s, i) => <PillCard key={s.title} {...s} i={i} />)}
         </div>
 
-        <div className="mt-24">
+        <div className="mt-16 sm:mt-24">
           <SectionHeader id="interior" kicker="Make any room sing." title="Interior applications" sub="Your walls deserve better." color="pop-purple" />
-          <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-10 grid gap-5 sm:mt-12 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {INTERIOR.map((s, i) => <PillCard key={s.title} {...s} i={i} />)}
           </div>
         </div>
@@ -520,11 +520,11 @@ function PillCard({ img, title, color, i }: { img: string; title: string; color:
       viewport={{ once: true }}
       transition={{ delay: i * 0.05, type: "spring", stiffness: 180, damping: 14 }}
       whileHover={{ y: -6, rotate: 0, scale: 1.04 }}
-      className="border-ink shadow-cartoon flex items-center gap-3 rounded-3xl px-4 py-4"
+      className="border-ink shadow-cartoon flex min-w-0 items-center gap-3 rounded-3xl px-4 py-4"
       style={{ background: `var(--${color})` }}
     >
       <ClayIcon src={img} alt={title} size="sm" />
-      <span className="font-display text-lg font-bold leading-tight">{title}</span>
+      <span className="min-w-0 font-display text-base font-bold leading-tight sm:text-lg">{title}</span>
     </motion.div>
   );
 }
@@ -540,7 +540,7 @@ function Specials() {
     { title: "Ammonia / Blue Prints", sub: "Tracing & garware films.", img: "/assets/images/icons/blueprints.png", color: "pop-purple" },
   ];
   return (
-    <section className="paper-bg py-24">
+    <section className="paper-bg py-16 sm:py-20 lg:py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <SectionHeader kicker="House specials" title="The fun extras" sub="The stuff people drive across town for." color="pop-pink" />
         <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -552,7 +552,7 @@ function Specials() {
               viewport={{ once: true }}
               transition={{ delay: i * 0.07, type: "spring", stiffness: 180 }}
               whileHover={{ y: -8, rotate: -1 }}
-              className="border-ink-thick shadow-cartoon-lg relative overflow-hidden rounded-3xl bg-white p-7"
+              className="border-ink-thick shadow-cartoon-lg relative overflow-hidden rounded-3xl bg-white p-5 sm:p-7"
             >
               <div className="flex items-start justify-between gap-4">
                 <div className="border-ink inline-block rounded-full px-3 py-1 text-xs font-black uppercase" style={{ background: `var(--${it.color})` }}>
@@ -560,10 +560,8 @@ function Specials() {
                 </div>
                 <ClayIcon src={it.img} alt={it.title} />
               </div>
-              <h3 className="mt-5 font-display text-3xl font-bold">{it.title}</h3>
-              <p className="mt-2 text-lg font-bold text-muted-foreground">{it.sub}</p>
-
-              <p className="mt-2 text-lg font-bold text-muted-foreground">{it.sub}</p>
+              <h3 className="mt-5 font-display text-2xl font-bold sm:text-3xl">{it.title}</h3>
+              <p className="mt-2 text-base font-bold text-muted-foreground sm:text-lg">{it.sub}</p>
             </motion.div>
           ))}
         </div>
@@ -581,10 +579,10 @@ function HowItWorks() {
     { n: "04", t: "Pick it up smiling", d: "Or get it delivered. Easy.", emoji: "🎉", c: "pop-pink" },
   ];
   return (
-    <section className="py-24" style={{ background: "var(--pop-mint)" }}>
+    <section className="py-16 sm:py-20 lg:py-24" style={{ background: "var(--pop-mint)" }}>
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <SectionHeader kicker="As easy as 1·2·3·4" title="How it works" sub="No mystery. No forms. Just printing." color="pop-red" />
-        <div className="mt-14 grid gap-6 md:grid-cols-4">
+        <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {steps.map((s, i) => (
             <motion.div
               key={s.n}
@@ -592,11 +590,11 @@ function HowItWorks() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1, type: "spring" }}
-              className="border-ink-thick shadow-cartoon-lg relative rounded-3xl bg-white p-7"
+              className="border-ink-thick shadow-cartoon-lg relative rounded-3xl bg-white p-5 sm:p-7"
             >
-              <div className="font-display text-6xl font-bold" style={{ color: `var(--${s.c})` }}>{s.n}</div>
-              <div className="mt-2 text-4xl">{s.emoji}</div>
-              <h3 className="mt-3 font-display text-2xl font-bold">{s.t}</h3>
+              <div className="font-display text-5xl font-bold sm:text-6xl" style={{ color: `var(--${s.c})` }}>{s.n}</div>
+              <div className="mt-2 text-3xl sm:text-4xl">{s.emoji}</div>
+              <h3 className="mt-3 font-display text-xl font-bold sm:text-2xl">{s.t}</h3>
               <p className="mt-1 font-bold">{s.d}</p>
             </motion.div>
           ))}
@@ -609,15 +607,15 @@ function HowItWorks() {
 /* ---------- visit / contact ---------- */
 function Visit() {
   return (
-    <section id="visit" className="py-24">
+    <section id="visit" className="py-16 sm:py-20 lg:py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <SectionHeader kicker="Come say hi" title="Visit the shop" sub="Right next to Yeshwant Stadium. You can't miss the red sign." color="pop-orange" />
 
-        <div className="mt-12 grid gap-8 lg:grid-cols-5">
+        <div className="mt-10 grid gap-6 sm:mt-12 sm:gap-8 lg:grid-cols-5">
           {/* hand-drawn map */}
           <motion.div
             initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-            className="border-ink-thick shadow-cartoon-lg overflow-hidden rounded-3xl bg-white p-6 lg:col-span-3"
+            className="border-ink-thick shadow-cartoon-lg overflow-hidden rounded-3xl bg-white p-4 sm:p-6 lg:col-span-3"
           >
             <MapDoodle />
           </motion.div>
@@ -625,10 +623,10 @@ function Visit() {
           {/* contact card */}
           <motion.div
             initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }}
-            className="border-ink-thick shadow-cartoon-lg rounded-3xl p-7 lg:col-span-2"
+            className="border-ink-thick shadow-cartoon-lg rounded-3xl p-5 sm:p-7 lg:col-span-2"
             style={{ background: "var(--pop-yellow)" }}
           >
-            <h3 className="font-display text-3xl font-bold">True Copy Centre Pvt. Ltd.</h3>
+            <h3 className="font-display text-2xl font-bold sm:text-3xl">True Copy Centre Pvt. Ltd.</h3>
             <p className="mt-2 flex items-start gap-2 font-bold">
               <MapPin className="mt-1 h-5 w-5 shrink-0" />
               58, Yeshwant Stadium, Dhantoli, Nagpur — 12
@@ -721,19 +719,19 @@ function SectionHeader({ kicker, title, sub, color, id }: { kicker: string; titl
     <div id={id} className="max-w-3xl">
       <motion.span
         initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}
-        className="font-marker text-3xl" style={{ color: `var(--${color})` }}
+        className="font-marker text-2xl sm:text-3xl" style={{ color: `var(--${color})` }}
       >
         {kicker}
       </motion.span>
       <motion.h2
         initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-        className="mt-1 font-display text-5xl font-bold leading-[0.95] sm:text-6xl"
+        className="mt-1 font-display text-[2.25rem] font-bold leading-[0.95] sm:text-5xl lg:text-6xl"
       >
         {title}
       </motion.h2>
       <motion.p
         initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: 0.15 }}
-        className="mt-3 text-lg font-bold text-muted-foreground"
+        className="mt-3 text-base font-bold text-muted-foreground sm:text-lg"
       >
         {sub}
       </motion.p>
