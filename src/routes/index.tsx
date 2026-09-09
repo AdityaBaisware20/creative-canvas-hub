@@ -75,23 +75,23 @@ function TopBar() {
 function Nav() {
   return (
     <nav className="sticky top-0 z-50 bg-cream/90 backdrop-blur border-b-4 border-ink" style={{ background: "color-mix(in oklab, var(--cream) 90%, transparent)" }}>
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6">
-        <a href="#top" className="flex items-center gap-2">
-          <div className="border-ink shadow-cartoon-sm grid h-11 w-11 place-items-center rounded-xl" style={{ background: "var(--pop-red)" }}>
+      <div className="mx-auto grid max-w-7xl grid-cols-[minmax(0,1fr)_auto] items-center gap-3 px-4 py-3 sm:px-6 md:flex md:justify-between">
+        <a href="#top" className="flex min-w-0 items-center gap-2">
+          <div className="border-ink shadow-cartoon-sm grid h-10 w-10 shrink-0 place-items-center rounded-xl sm:h-11 sm:w-11" style={{ background: "var(--pop-red)" }}>
             <span className="font-display text-xl font-black text-white">T</span>
           </div>
-          <div className="leading-tight">
-            <div className="font-display text-lg font-bold">True Copy Centre</div>
-            <div className="text-xs font-bold text-muted-foreground">Nagpur · since you needed prints</div>
+          <div className="min-w-0 leading-tight">
+            <div className="truncate font-display text-base font-bold sm:text-lg">True Copy Centre</div>
+            <div className="hidden text-xs font-bold text-muted-foreground sm:block">Nagpur · since you needed prints</div>
           </div>
         </a>
-        <div className="hidden gap-6 md:flex">
+        <div className="hidden gap-5 md:flex lg:gap-6">
           {[["Services", "#services"], ["Big Stuff", "#big"], ["Interiors", "#interior"], ["Visit", "#visit"]].map(([n, h]) => (
-            <a key={n} href={h} className="font-display text-base font-bold hover:underline decoration-4 underline-offset-4" style={{ textDecorationColor: "var(--pop-red)" }}>{n}</a>
+            <a key={n} href={h} className="whitespace-nowrap font-display text-base font-bold hover:underline decoration-4 underline-offset-4" style={{ textDecorationColor: "var(--pop-red)" }}>{n}</a>
           ))}
         </div>
-        <a href="tel:+919822224644" className="border-ink shadow-cartoon-sm rounded-full px-4 py-2 font-display text-sm font-bold" style={{ background: "var(--pop-yellow)" }}>
-          📞 Call us
+        <a href="tel:+919822224644" className="border-ink shadow-cartoon-sm shrink-0 whitespace-nowrap rounded-full px-3 py-2 font-display text-sm font-bold sm:px-4" style={{ background: "var(--pop-yellow)" }}>
+          📞 <span className="hidden xs:inline">Call us</span><span className="xs:hidden">Call</span>
         </a>
       </div>
     </nav>
