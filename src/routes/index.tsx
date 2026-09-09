@@ -494,16 +494,16 @@ const INTERIOR = [
 
 function BigStuff() {
   return (
-    <section id="big" className="py-24">
+    <section id="big" className="py-16 sm:py-20 lg:py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <SectionHeader kicker="Goes big. Goes loud." title="Industrial applications" sub="From the warehouse floor to the highway billboard." color="pop-blue" />
-        <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-10 grid gap-5 sm:mt-12 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {INDUSTRIAL.map((s, i) => <PillCard key={s.title} {...s} i={i} />)}
         </div>
 
-        <div className="mt-24">
+        <div className="mt-16 sm:mt-24">
           <SectionHeader id="interior" kicker="Make any room sing." title="Interior applications" sub="Your walls deserve better." color="pop-purple" />
-          <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-10 grid gap-5 sm:mt-12 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {INTERIOR.map((s, i) => <PillCard key={s.title} {...s} i={i} />)}
           </div>
         </div>
@@ -520,11 +520,11 @@ function PillCard({ img, title, color, i }: { img: string; title: string; color:
       viewport={{ once: true }}
       transition={{ delay: i * 0.05, type: "spring", stiffness: 180, damping: 14 }}
       whileHover={{ y: -6, rotate: 0, scale: 1.04 }}
-      className="border-ink shadow-cartoon flex items-center gap-3 rounded-3xl px-4 py-4"
+      className="border-ink shadow-cartoon flex min-w-0 items-center gap-3 rounded-3xl px-4 py-4"
       style={{ background: `var(--${color})` }}
     >
       <ClayIcon src={img} alt={title} size="sm" />
-      <span className="font-display text-lg font-bold leading-tight">{title}</span>
+      <span className="min-w-0 font-display text-base font-bold leading-tight sm:text-lg">{title}</span>
     </motion.div>
   );
 }
@@ -540,7 +540,7 @@ function Specials() {
     { title: "Ammonia / Blue Prints", sub: "Tracing & garware films.", img: "/assets/images/icons/blueprints.png", color: "pop-purple" },
   ];
   return (
-    <section className="paper-bg py-24">
+    <section className="paper-bg py-16 sm:py-20 lg:py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <SectionHeader kicker="House specials" title="The fun extras" sub="The stuff people drive across town for." color="pop-pink" />
         <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -552,7 +552,7 @@ function Specials() {
               viewport={{ once: true }}
               transition={{ delay: i * 0.07, type: "spring", stiffness: 180 }}
               whileHover={{ y: -8, rotate: -1 }}
-              className="border-ink-thick shadow-cartoon-lg relative overflow-hidden rounded-3xl bg-white p-7"
+              className="border-ink-thick shadow-cartoon-lg relative overflow-hidden rounded-3xl bg-white p-5 sm:p-7"
             >
               <div className="flex items-start justify-between gap-4">
                 <div className="border-ink inline-block rounded-full px-3 py-1 text-xs font-black uppercase" style={{ background: `var(--${it.color})` }}>
@@ -560,10 +560,8 @@ function Specials() {
                 </div>
                 <ClayIcon src={it.img} alt={it.title} />
               </div>
-              <h3 className="mt-5 font-display text-3xl font-bold">{it.title}</h3>
-              <p className="mt-2 text-lg font-bold text-muted-foreground">{it.sub}</p>
-
-              <p className="mt-2 text-lg font-bold text-muted-foreground">{it.sub}</p>
+              <h3 className="mt-5 font-display text-2xl font-bold sm:text-3xl">{it.title}</h3>
+              <p className="mt-2 text-base font-bold text-muted-foreground sm:text-lg">{it.sub}</p>
             </motion.div>
           ))}
         </div>
@@ -584,7 +582,7 @@ function HowItWorks() {
     <section className="py-24" style={{ background: "var(--pop-mint)" }}>
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <SectionHeader kicker="As easy as 1·2·3·4" title="How it works" sub="No mystery. No forms. Just printing." color="pop-red" />
-        <div className="mt-14 grid gap-6 md:grid-cols-4">
+        <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {steps.map((s, i) => (
             <motion.div
               key={s.n}
@@ -592,11 +590,11 @@ function HowItWorks() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1, type: "spring" }}
-              className="border-ink-thick shadow-cartoon-lg relative rounded-3xl bg-white p-7"
+              className="border-ink-thick shadow-cartoon-lg relative rounded-3xl bg-white p-5 sm:p-7"
             >
-              <div className="font-display text-6xl font-bold" style={{ color: `var(--${s.c})` }}>{s.n}</div>
-              <div className="mt-2 text-4xl">{s.emoji}</div>
-              <h3 className="mt-3 font-display text-2xl font-bold">{s.t}</h3>
+              <div className="font-display text-5xl font-bold sm:text-6xl" style={{ color: `var(--${s.c})` }}>{s.n}</div>
+              <div className="mt-2 text-3xl sm:text-4xl">{s.emoji}</div>
+              <h3 className="mt-3 font-display text-xl font-bold sm:text-2xl">{s.t}</h3>
               <p className="mt-1 font-bold">{s.d}</p>
             </motion.div>
           ))}
@@ -721,19 +719,19 @@ function SectionHeader({ kicker, title, sub, color, id }: { kicker: string; titl
     <div id={id} className="max-w-3xl">
       <motion.span
         initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}
-        className="font-marker text-3xl" style={{ color: `var(--${color})` }}
+        className="font-marker text-2xl sm:text-3xl" style={{ color: `var(--${color})` }}
       >
         {kicker}
       </motion.span>
       <motion.h2
         initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-        className="mt-1 font-display text-5xl font-bold leading-[0.95] sm:text-6xl"
+        className="mt-1 font-display text-[2.25rem] font-bold leading-[0.95] sm:text-5xl lg:text-6xl"
       >
         {title}
       </motion.h2>
       <motion.p
         initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: 0.15 }}
-        className="mt-3 text-lg font-bold text-muted-foreground"
+        className="mt-3 text-base font-bold text-muted-foreground sm:text-lg"
       >
         {sub}
       </motion.p>
