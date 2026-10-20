@@ -417,8 +417,8 @@ const WHEEL = [
 
 function Wheel() {
   return (
-    <section className="relative overflow-hidden py-16 sm:py-20 lg:py-24" style={{ background: "var(--pop-yellow)" }}>
-      <div className="mx-auto grid max-w-7xl items-center gap-10 px-4 sm:px-6 lg:grid-cols-2 lg:gap-12">
+    <section className="relative py-16 sm:py-20 lg:py-24" style={{ background: "var(--pop-yellow)" }}>
+      <div className="mx-auto grid max-w-7xl items-center gap-10 px-4 sm:px-6 xl:grid-cols-2 xl:gap-12">
         <div>
           <span className="font-marker text-2xl sm:text-3xl" style={{ color: "var(--pop-red)" }}>spin me!</span>
           <h2 className="mt-2 font-display text-[2.25rem] font-bold leading-none sm:text-5xl lg:text-6xl">
@@ -433,12 +433,13 @@ function Wheel() {
           </a>
         </div>
 
-        <div className="relative mx-auto flex aspect-square w-full max-w-[340px] items-center justify-center overflow-hidden sm:max-w-[440px] lg:max-w-[520px]">
-          <div className="relative h-[520px] w-[520px] shrink-0 origin-center scale-[0.63] sm:scale-[0.84] lg:scale-100">
+        <div className="relative mx-auto flex aspect-square w-full max-w-[600px] items-center justify-center overflow-visible">
+          <div className="relative h-[520px] w-[520px] shrink-0 origin-center scale-[0.52] min-[375px]:scale-[0.62] min-[440px]:scale-[0.72] min-[520px]:scale-[0.82] min-[600px]:scale-[0.92] md:scale-100">
             <motion.div
               className="absolute inset-0"
               animate={{ rotate: 360 }}
-              transition={{ duration: 50, repeat: Infinity, ease: "linear" }}
+              style={{ transformOrigin: "50% 50%", willChange: "transform" }}
+              transition={{ duration: 36, repeat: Infinity, ease: "linear" }}
             >
               {WHEEL.map((p, i) => {
                 const angle = (i / WHEEL.length) * 360;
