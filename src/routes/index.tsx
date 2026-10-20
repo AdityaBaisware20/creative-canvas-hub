@@ -433,8 +433,8 @@ function Wheel() {
           </a>
         </div>
 
-        <div className="relative mx-auto flex aspect-square w-full max-w-[600px] items-center justify-center overflow-visible">
-          <div className="relative h-[520px] w-[520px] shrink-0 origin-center scale-[0.52] min-[375px]:scale-[0.62] min-[440px]:scale-[0.72] min-[520px]:scale-[0.82] min-[600px]:scale-[0.92] md:scale-100">
+        <div className="relative mx-auto flex aspect-square w-full min-w-0 max-w-[600px] items-center justify-center overflow-visible">
+          <div className="absolute left-1/2 top-1/2 h-[520px] w-[520px] -translate-x-1/2 -translate-y-1/2 origin-center scale-[0.52] min-[375px]:scale-[0.62] min-[440px]:scale-[0.72] min-[520px]:scale-[0.82] min-[600px]:scale-[0.92] md:scale-100">
             <motion.div
               className="absolute inset-0"
               animate={{ rotate: 360 }}
