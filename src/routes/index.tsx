@@ -13,6 +13,8 @@ export const Route = createFileRoute("/")({
       { name: "description", content: "Xerox, prints, signage, banners, stickers, wallpapers & more in Nagpur. Print anything, any size, any surface." },
       { property: "og:title", content: "True Copy Centre — Nagpur" },
       { property: "og:description", content: "Print anything. Anywhere. Any size." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: Index,
